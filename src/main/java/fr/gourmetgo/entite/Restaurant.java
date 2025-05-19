@@ -22,16 +22,17 @@ public class Restaurant {
     private String adresse;
 
     @NotBlank(message = "Veuillez renseigner les horaires d'ouverture du restaurant")
-    private String horaire;
+    private String horaires;
 
     @NotBlank(message = "Veuillez renseigner le numéro de téléphone du restaurant")
     @Pattern(regexp = "^0[1-9][0-9]{8}$", message = "Le numéro de téléphone doit contenir 10 chiffres et commencer par 0.")
-    private int telResto;
+    private String telResto;
 
     @NotBlank(message = "Veuillez renseigner le type du restaurant.")
     private String typeResto;
 
-    private String statut; // "VALIDÉ" ou "NON_VALIDE"
+    
+    
 
 
     
@@ -40,15 +41,15 @@ public class Restaurant {
     public Restaurant() {
     }
 
-    public Restaurant(Long idResto, String nomResto, String adresse, String horaire, int telResto, String typeResto,
+    public Restaurant(Long idResto, String nomResto, String adresse, String horaire, String telResto, String typeResto,
             String statut) {
         this.idResto = idResto;
         this.nomResto = nomResto;
         this.adresse = adresse;
-        this.horaire = horaire;
+        this.horaires = horaires;
         this.telResto = telResto;
         this.typeResto = typeResto;
-        this.statut = statut;
+
     }
 
 
@@ -81,18 +82,18 @@ public class Restaurant {
     }
 
     public String getHoraire() {
-        return horaire;
+        return horaires;
     }
 
     public void setHoraire(String horaire) {
-        this.horaire = horaire;
+        this.horaires = horaire;
     }
 
-    public int getTelResto() {
+    public String getTelResto() {
         return telResto;
     }
 
-    public void setTelResto(int telResto) {
+    public void setTelResto(String telResto) {
         this.telResto = telResto;
     }
 
@@ -104,13 +105,7 @@ public class Restaurant {
         this.typeResto = typeResto;
     }
 
-    public String getStatut() {
-        return statut;
-    }
-
-    public void setStatut(String statut) {
-        this.statut = statut;
-    }
+    
 
     
 }
