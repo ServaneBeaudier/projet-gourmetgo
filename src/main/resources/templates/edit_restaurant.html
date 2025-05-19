@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modifier</title>
+</head>
+<body>
+    <form th:action="@{/restaurants/update}" th:object="${restaurant}" method="POST">
+    <input type="hidden" th:field="*{id}" />
+    <label>Nom : </label><input type="text" th:field="*{nomResto}" /><br>
+    <label>Adresse : </label><input type="text" th:field="*{adresse}" /><br>
+    <label>Horaire : </label><input type="text" th:field="*{horaire}" /><br>
+    <label>Téléphone : </label><input type="text" th:field="*{numeroTel}" /><br>
+    <label>Type Restaurant : </label><input type="text" th:field="*{typeResto}" /><br>
+    <button type="submit">Mettre à jour</button>
+</form>
+</body>
+</html>
