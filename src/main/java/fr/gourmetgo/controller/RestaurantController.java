@@ -27,13 +27,22 @@ public class RestaurantController {
     }
 
     @PostMapping("/formulaire")
-    public String inscrireRestaurant(@Valid @ModelAttribute Restaurant restaurant, BindingResult result, Model model) {
-        if (result.hasErrors()) {
-            model.addAttribute("errors", result.getAllErrors());
-            return "formulaire"; // Retourne la page avec les erreurs affichées
-        }
-
-        restaurantService.enregistrerRestaurant(restaurant);
-        return "redirect:/success"; // Redirection vers une page succès
+public String inscrireRestaurant(@Valid @ModelAttribute("restaurant") Restaurant restaurant, BindingResult result, Model model) {
+    if (result.hasErrors()) {
+        model.addAttribute("restaurant", restaurant); // Recharge l’objet avec erreurs
+        return "formulaire"; // Retourne le formulaire avec erreurs visibles
     }
+    restaurantService.enregistrerRestaurant(restaurant);
+    return "redirect:/restaurants/success";
 }
+
+@GetMapping("/success")
+public String afficherSuccess() {
+    return "success"; // Retourne la vue success.html
+}
+
+
+}
+
+
+

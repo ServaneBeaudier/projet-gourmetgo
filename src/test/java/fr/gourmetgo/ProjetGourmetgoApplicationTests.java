@@ -4,7 +4,6 @@ import fr.gourmetgo.entite.Restaurant;
 import fr.gourmetgo.repository.AppRepository;
 import fr.gourmetgo.service.RestaurantService;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -23,7 +22,7 @@ public class ProjetGourmetgoApplicationTests {
         Restaurant resto = new Restaurant();
         resto.setNomResto("Chez Dédé");
         resto.setAdresse("12 rue aux hasards, Paris");
-        resto.setHoraire("10h-22h");
+        resto.setHoraires("10h-22h");
         resto.setTelResto("0159897451");
         resto.setTypeResto("Italien");
 

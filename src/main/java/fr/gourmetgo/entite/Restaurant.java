@@ -81,11 +81,11 @@ public class Restaurant {
         this.adresse = adresse;
     }
 
-    public String getHoraire() {
+    public String getHoraires() {
         return horaires;
     }
 
-    public void setHoraire(String horaire) {
+    public void setHoraires(String horaire) {
         this.horaires = horaire;
     }
 

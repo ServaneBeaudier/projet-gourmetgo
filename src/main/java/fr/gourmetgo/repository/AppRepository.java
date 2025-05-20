@@ -13,7 +13,4 @@ public interface AppRepository extends JpaRepository<Restaurant, Long> {
 }
 
 
-//corrections
-//creation classe RestaurantService
-//creation classe RestaurantController
-//test JUnit
+
