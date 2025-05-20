@@ -21,16 +21,18 @@ public class Restaurant {
     private String horaire;
     private String numeroTel;
     private String typeResto;
+    private String imagePath;
 
     public Restaurant() {
     }
 
-    public Restaurant(String adresse, String nomResto, String horaire, String numeroTel, String typeResto) {
+    public Restaurant(String adresse, String nomResto, String horaire, String numeroTel, String typeResto, String imagePath) {
         this.adresse = adresse;
         this.nomResto = nomResto;
         this.horaire = horaire;
         this.numeroTel = numeroTel;
         this.typeResto = typeResto;
+        this.imagePath = imagePath;
     }
 
     @OneToOne
@@ -92,6 +94,18 @@ public class Restaurant {
     public void setGerant(Gerant gerant) {
         this.gerant = gerant;
     }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+   
+
+    
 
     
 }
