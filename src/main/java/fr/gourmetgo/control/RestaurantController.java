@@ -48,7 +48,7 @@ public class RestaurantController {
     @PostMapping("/restaurants/update")
     public String updateRestaurant(@ModelAttribute("restaurant") Restaurant restaurant) {
         restaurantService.updateRestaurant(restaurant);
-        return "redirect:/restaurants";
+        return "redirect:/admin/list";
     }
 
     @GetMapping("/list")
