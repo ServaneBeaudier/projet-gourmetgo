@@ -30,6 +30,12 @@ public class Restaurant {
 
     @NotBlank(message = "Veuillez renseigner le type du restaurant.")
     private String typeResto;
+ 
+    @NotBlank(message = "Veuillez renseigner l'image.")
+    private String imageResto;
+    
+    
+
 
     
     
@@ -104,6 +110,16 @@ public class Restaurant {
     public void setTypeResto(String typeResto) {
         this.typeResto = typeResto;
     }
+
+    public String getImageResto() {
+        return imageResto;
+    }
+
+    public void setImageResto(String imageResto) {
+        this.imageResto = imageResto;
+    }
+
+ 
 
     
 

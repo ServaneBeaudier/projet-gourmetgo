@@ -9,7 +9,11 @@
     <div class="container mt-5 text-center">
         <h1 class="text-success">Inscription réussie !</h1>
         <p>Le restaurant a bien été enregistré.</p>
-        <a href="/restaurants/success" class="btn btn-primary">Accedez dès maintenant à votre restaurant !</a>
+        <a th:href="@{/restaurants/{idResto}(idResto=${restaurantId})}" class="btn btn-primary">Accéder à votre restaurant dès maintenant</a>
+
+
+
+
     </div>
 </body>
 </html>
