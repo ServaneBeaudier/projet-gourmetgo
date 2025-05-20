@@ -20,7 +20,7 @@ public class RestaurantController {
     private RestaurantService restaurantService;
 
     @GetMapping("/restaurants/edit/{id}")
-    public String showEditForm(@PathVariable("id") int id, Model model) {
+    public String showEditForm(@PathVariable("id") long id, Model model) {
         Restaurant restaurant = restaurantService.getRestaurantById(id);
         model.addAttribute("restaurant", restaurant);
         return "edit_restaurant";

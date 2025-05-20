@@ -14,7 +14,7 @@ public class RestaurantService {
     @Autowired
     private RestaurantRepository restaurantRepo;
 
-    public Restaurant getRestaurantById(int id){
+    public Restaurant getRestaurantById(long id){
         return restaurantRepo.findById(id).orElse(null);
     }
 

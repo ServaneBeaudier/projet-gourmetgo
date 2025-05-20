@@ -19,13 +19,13 @@ public class Restaurant {
     private String adresse;
     private String nomResto;
     private String horaire;
-    private int numeroTel;
+    private String numeroTel;
     private String typeResto;
 
     public Restaurant() {
     }
 
-    public Restaurant(String adresse, String nomResto, String horaire, int numeroTel, String typeResto) {
+    public Restaurant(String adresse, String nomResto, String horaire, String numeroTel, String typeResto) {
         this.adresse = adresse;
         this.nomResto = nomResto;
         this.horaire = horaire;
@@ -69,11 +69,11 @@ public class Restaurant {
         this.horaire = horaire;
     }
 
-    public int getNumeroTel() {
+    public String getNumeroTel() {
         return numeroTel;
     }
 
-    public void setNumeroTel(int numeroTel) {
+    public void setNumeroTel(String numeroTel) {
         this.numeroTel = numeroTel;
     }
 
