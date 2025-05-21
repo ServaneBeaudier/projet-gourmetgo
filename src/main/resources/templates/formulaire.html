@@ -58,7 +58,7 @@
 <body>
   <div class="container mt-5">
     
-    <form action="/restaurants/formulaire" method="post" class="p-4 shadow rounded" th:object="${restaurant}">
+    <form action="/admin/formulaire" method="post" class="p-4 shadow rounded" th:object="${restaurant}" enctype="multipart/form-data">
       <!-- Nom du restaurant -->
       <div class="text-center mb-4">
         <label for="nomResto" class="form-label h4">Nom du restaurant :</label>
@@ -165,7 +165,7 @@
         <div class="col-md-4 d-flex justify-content-center">
           <div class="image-placeholder">
             <label for="imageResto" class="form-label text-white">Ajouter une image :</label>
-            <input type="file" id="imageResto" name="imageResto" class="form-control" accept="image/*">
+            <input type="file" id="imageResto" name="imageFile" class="form-control" accept="image/*">
             <div class="text-danger" th:if="${#fields.hasErrors('imageResto')}" th:errors="*{imageResto}"></div>
           </div>
           <div class="text-danger" th:if="${#fields.hasGlobalErrors()}">

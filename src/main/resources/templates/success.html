@@ -25,7 +25,7 @@
         <div class="d-flex justify-content-center gap-3">
            
             <!-- Bouton pour accéder aux détails du restaurant inscrit -->
-            <a th:href="@{/restaurants/{idResto}(idResto=${param.restaurantId})}" class="btn btn-electric-blue">Accéder dès maintenant à votre restaurant</a>
+            <a th:href="@{/admin/list/{id}(id=${param.restaurantId})}" class="btn btn-electric-blue">Accéder dès maintenant à votre restaurant</a>
 
              <!-- Bouton pour recommencer une nouvelle inscription -->
             <a href="/restaurants/formulaire" class="btn btn-electric-blue">Commencer une nouvelle inscription</a>

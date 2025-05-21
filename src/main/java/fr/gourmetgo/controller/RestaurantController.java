@@ -41,7 +41,7 @@ public class RestaurantController {
         return "dashboard"; 
     }
 
-    @GetMapping("/formulaire")
+    @GetMapping("/restaurants/formulaire")
     public String afficherFormulaire(Model model) {
     Restaurant restaurant = new Restaurant(); // Déclaration de la variable 'r'
     restaurant.setTypeResto("");    // On s'assure que le champ type de restaurant est vide
@@ -51,24 +51,40 @@ public class RestaurantController {
 
 
    @PostMapping("/formulaire")
-    public String inscrireRestaurant(@Valid @ModelAttribute("restaurant") Restaurant restaurant, BindingResult result, Model model) {
+public String inscrireRestaurant(@Valid @ModelAttribute("restaurant") Restaurant restaurant,
+                                 BindingResult result,
+                                 @RequestParam("imageFile") MultipartFile imageFile,
+                                 Model model) {
     if (result.hasErrors()) {
-        // Si il y a déjà des erreurs de validation, on retourne le formulaire
         return "formulaire";
     }
-    
-    // Vérifier si le restaurant existe déjà selon vos critères
+
     if (restaurantService.restaurantExists(restaurant)) {
-        // Ajouter une erreur globale (ou sur un champ en particulier) dans BindingResult
         result.reject("duplicate", "Ce restaurant existe déjà.");
         return "formulaire";
     }
-    
-    // Enregistre le restaurant s'il n'existe pas déjà
+
+    if (!imageFile.isEmpty()) {
+        try {
+            String fileName = UUID.randomUUID() + "_" + imageFile.getOriginalFilename();
+            Path uploadDir = Paths.get("uploads");
+            if (!Files.exists(uploadDir)) {
+                Files.createDirectories(uploadDir);
+            }
+            Path filePath = uploadDir.resolve(fileName);
+            Files.copy(imageFile.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+            restaurant.setImageResto("/uploads/" + fileName);
+        } catch (IOException e) {
+            e.printStackTrace();
+            model.addAttribute("uploadError", "Erreur lors de l'envoi de l'image.");
+            return "formulaire";
+        }
+    }
+
     Restaurant nouveauRestaurant = restaurantService.enregistrerRestaurant(restaurant);
-    
-    return "redirect:/restaurants/success?restaurantId=" + nouveauRestaurant.getId();
+    return "redirect:/admin/success?restaurantId=" + nouveauRestaurant.getId();
 }
+
 
     @GetMapping("/success")
     public String afficherSuccess() {

@@ -64,9 +64,4 @@ public abstract class Utilisateur {
         this.motDePasse = motDePasse;
     }
 
-    
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> origin/connexion
