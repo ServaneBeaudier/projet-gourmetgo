@@ -1,4 +1,4 @@
-package fr.gourmetgo.repository; // Assurez-vous que le package est bien scanné
+package fr.gourmetgo.repository; 
 
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;

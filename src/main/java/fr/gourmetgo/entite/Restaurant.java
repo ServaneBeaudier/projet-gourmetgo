@@ -25,9 +25,6 @@ public class Restaurant {
     @NotBlank(message = "Veuillez renseigner le nom du restaurant")
     private String nomResto;
 
-   /*  @NotBlank(message = "Veuillez renseigner l'adresse du restaurant")
-    private String adresse;*/
-
     @NotBlank(message = "Veuillez renseigner le numéro")
     private String numRue;
     
@@ -40,8 +37,6 @@ public class Restaurant {
     @NotBlank(message = "Veuillez renseigner la ville")
     private String ville;
 
-    /*@NotBlank(message = "Veuillez renseigner les horaires d'ouverture du restaurant")
-    private String horaires;*/
 
     @NotNull(message = "Veuillez renseigner l'horaire d'ouverture")
     private LocalTime heureOuverture;
@@ -63,11 +58,6 @@ public class Restaurant {
     
 
 
-    
-    
-
-
-    
 
     // Constructeurs
     public Restaurant() {
@@ -77,13 +67,11 @@ public class Restaurant {
             String statut) {
         this.idResto = idResto;
         this.nomResto = nomResto;
-        /*this.adresse = adresse;*/
         this.numRue = numRue;
         this.nomRue = nomRue;
         this.codePostal = codePostal;
         this.ville = ville;
         this.imageResto = imageResto;
-        /*this.horaires = horaires;*/
         this.telResto = telResto;
         this.typeResto = typeResto;
 
@@ -109,23 +97,6 @@ public class Restaurant {
     public void setNomResto(String nomResto) {
         this.nomResto = nomResto;
     }
-
-   /* public String getAdresse() {
-        return adresse;
-    }
-
-    public void setAdresse(String adresse) {
-        this.adresse = adresse;
-    }*/
-
-    /*public String getHoraires() {
-        return horaires;
-    }
-
-    public void setHoraires(String horaire) {
-        this.horaires = horaire;
-    }*/
-    
 
     public String getTelResto() {
         return telResto;

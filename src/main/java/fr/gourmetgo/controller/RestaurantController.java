@@ -3,9 +3,7 @@ package fr.gourmetgo.controller;
 import fr.gourmetgo.service.RestaurantService;
 import fr.gourmetgo.entite.Restaurant;
 import jakarta.validation.Valid;
-/* 
-import jakarta.servlet.ServletContext;
-import java.io.File;*/
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,8 +25,6 @@ public class RestaurantController {
     @Autowired
     private RestaurantService restaurantService;
 
-   /*  @Autowired
-private ServletContext servletContext;*/
 
 
     @GetMapping("/formulaire")
@@ -61,58 +57,6 @@ public String inscrireRestaurant(@Valid @ModelAttribute("restaurant") Restaurant
     
     return "redirect:/restaurants/success?restaurantId=" + nouveauRestaurant.getIdResto();
 }
-
-/*@PostMapping("/formulaire")
-public String inscrireRestaurant(
-        @Valid @ModelAttribute("restaurant") Restaurant restaurant,
-        BindingResult result,
-        @RequestParam("imageResto") MultipartFile imageFile,
-        RedirectAttributes redirectAttributes) {
-
-    if (result.hasErrors()) {
-        redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.restaurant", result);
-        redirectAttributes.addFlashAttribute("restaurant", restaurant);
-        return "redirect:/restaurants/formulaire";
-    }
-    
-    // Vérifie s'il y a un fichier et traite-le
-    if (!imageFile.isEmpty()) {
-        try {
-            // Par exemple, sauve le fichier dans un dossier "uploads"
-            String uploadsDir = "/uploads/";
-            String realPathtoUploads = servletContext.getRealPath(uploadsDir); // Tu dois injecter ServletContext
-            if (!new File(realPathtoUploads).exists()) {
-                new File(realPathtoUploads).mkdir(); // création du dossier si besoin
-            }
-
-            String orgName = imageFile.getOriginalFilename();
-            String filePath = realPathtoUploads + orgName;
-            File dest = new File(filePath);
-            imageFile.transferTo(dest);
-
-            // On suppose que tu souhaites stocker le chemin relatif accessible depuis l'application,
-            // par exemple : "/uploads/nomdufichier.ext"
-            restaurant.setImageResto(uploadsDir + orgName);
-        } catch (Exception e) {
-            e.printStackTrace();
-            // Gère l'erreur d'upload si besoin
-        }
-    }
-
-    // Vérifier en doublon si besoin
-    if (restaurantService.restaurantExists(restaurant)) {
-        result.reject("duplicate", "Ce restaurant existe déjà.");
-        redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.restaurant", result);
-        redirectAttributes.addFlashAttribute("restaurant", restaurant);
-        return "redirect:/restaurants/formulaire";
-    }
-    
-    Restaurant nouveauRestaurant = restaurantService.enregistrerRestaurant(restaurant);
-    return "redirect:/restaurants/success?restaurantId=" + nouveauRestaurant.getIdResto();
-}*/
-
-
-
 
 @GetMapping("/success")
 public String afficherSuccess() {
