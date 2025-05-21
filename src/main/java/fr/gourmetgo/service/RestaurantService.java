@@ -1,6 +1,7 @@
 package fr.gourmetgo.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,9 +23,23 @@ public class RestaurantService {
         return restaurantRepo.save(restaurant);
     }
 
+    public Restaurant enregistrerRestaurant(Restaurant restaurant) {
+        return restaurantRepo.save(restaurant); // Retourne l’objet enregistré avec son ID
+    }
+
     public List<Restaurant> getAllRestaurants() {
         return restaurantRepo.findAll();
     }
 
-
+    public boolean restaurantExists(Restaurant restaurant) {
+    Optional<Restaurant> existing = restaurantRepo.findByNomRestoAndCodePostalAndVilleAndNomRueAndNumRue(
+        restaurant.getNomResto(),
+        restaurant.getCodePostal(),
+        restaurant.getVille(),
+        restaurant.getNomRue(),
+        restaurant.getNumRue()
+    );
+    return existing.isPresent();    
+    }
 }
+

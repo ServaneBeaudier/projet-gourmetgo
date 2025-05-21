@@ -1,15 +1,23 @@
 package fr.gourmetgo.entite;
 
+import java.time.LocalTime;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;  
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
 @Entity
-@Table(name = "restaurantsgg")
+@Table(
+    name = "restaurants",
+    uniqueConstraints = @UniqueConstraint(columnNames = {"nomResto", "numRue", "nomRue", "codePostal", "ville"})
+)
+
 public class Restaurant {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,43 +26,55 @@ public class Restaurant {
     @NotBlank(message = "Veuillez renseigner le nom du restaurant")
     private String nomResto;
 
-    @NotBlank(message = "Veuillez renseigner l'adresse du restaurant")
-    private String adresse;
+    @NotBlank(message = "Veuillez renseigner le numéro")
+    private String numRue;
+    
+    @NotBlank(message = "Veuillez renseigner la rue")
+    private String nomRue;
+    
+    @NotBlank(message = "Veuillez renseigner le code postal")
+    private String codePostal;
+    
+    @NotBlank(message = "Veuillez renseigner la ville")
+    private String ville;
 
-    @NotBlank(message = "Veuillez renseigner les horaires d'ouverture du restaurant")
-    private String horaire;
+
+    @NotNull(message = "Veuillez renseigner l'horaire d'ouverture")
+    private LocalTime heureOuverture;
+
+    @NotNull(message = "Veuillez renseigner l'horaire de fermeture")
+    private LocalTime heureFermeture;
+
 
     @NotBlank(message = "Veuillez renseigner le numéro de téléphone du restaurant")
     @Pattern(regexp = "^0[1-9][0-9]{8}$", message = "Le numéro de téléphone doit contenir 10 chiffres et commencer par 0.")
-    private int telResto;
+    private String telResto;
 
     @NotBlank(message = "Veuillez renseigner le type du restaurant.")
     private String typeResto;
-
-    private String statut; // "VALIDÉ" ou "NON_VALIDE"
-
-
+ 
+    @NotBlank(message = "Veuillez renseigner l'image.")
+    private String imageResto;
     
+
 
     // Constructeurs
     public Restaurant() {
     }
 
-    public Restaurant(Long idResto, String nomResto, String adresse, String horaire, int telResto, String typeResto,
-            String statut) {
+    public Restaurant(Long idResto, String nomResto, String adresse, String horaire, String telResto, String typeResto) {
         this.idResto = idResto;
         this.nomResto = nomResto;
-        this.adresse = adresse;
-        this.horaire = horaire;
+        this.numRue = numRue;
+        this.nomRue = nomRue;
+        this.codePostal = codePostal;
+        this.ville = ville;
+        this.imageResto = imageResto;
         this.telResto = telResto;
         this.typeResto = typeResto;
-        this.statut = statut;
     }
 
-
-
     // Getters & Setters
-
 
     public Long getIdResto() {
         return idResto;
@@ -72,28 +92,20 @@ public class Restaurant {
         this.nomResto = nomResto;
     }
 
-    public String getAdresse() {
-        return adresse;
+    public LocalTime getHeureOuverture() {
+        return heureOuverture;
     }
 
-    public void setAdresse(String adresse) {
-        this.adresse = adresse;
+    public void setHeureOuverture(LocalTime heureOuverture) {
+        this.heureOuverture = heureOuverture;
     }
 
-    public String getHoraire() {
-        return horaire;
+    public LocalTime getHeureFermeture() {
+        return heureFermeture;
     }
 
-    public void setHoraire(String horaire) {
-        this.horaire = horaire;
-    }
-
-    public int getTelResto() {
-        return telResto;
-    }
-
-    public void setTelResto(int telResto) {
-        this.telResto = telResto;
+    public void setHeureFermeture(LocalTime heureFermeture) {
+        this.heureFermeture = heureFermeture;
     }
 
     public String getTypeResto() {
@@ -104,13 +116,57 @@ public class Restaurant {
         this.typeResto = typeResto;
     }
 
-    public String getStatut() {
-        return statut;
+    public String getImageResto() {
+        return imageResto;
     }
 
-    public void setStatut(String statut) {
-        this.statut = statut;
+    public void setImageResto(String imageResto) {
+        this.imageResto = imageResto;
     }
+
+    public String getNumRue() {
+        return numRue;
+    }
+
+    public void setNumRue(String numRue) {
+        this.numRue = numRue;
+    }
+
+    public String getNomRue() {
+        return nomRue;
+    }
+
+    public void setNomRue(String nomRue) {
+        this.nomRue = nomRue;
+    }
+
+    public String getCodePostal() {
+        return codePostal;
+    }
+
+    public void setCodePostal(String codePostal) {
+        this.codePostal = codePostal;
+    }
+
+    public String getVille() {
+        return ville;
+    }
+
+    public void setVille(String ville) {
+        this.ville = ville;
+    }
+
+    public String getTelResto() {
+        return telResto;
+    }
+
+    public void setTelResto(String telResto) {
+        this.telResto = telResto;
+    }
+
+ 
+
+    
 
     
 }
