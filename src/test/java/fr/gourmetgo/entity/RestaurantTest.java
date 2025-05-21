@@ -9,7 +9,7 @@ public class RestaurantTest {
 
     @Test
     public void testRestaurantGetterAndSetter(){
-        Restaurant restaurant = new Restaurant("adresse", "Chez Dede", "de 10h à 12h", "0250505050", "Bistrot");
+        Restaurant restaurant = new Restaurant("adresse", "Chez Dede", "de 10h à 12h", "0250505050", "Bistrot", null);
 
         assertEquals("adresse", restaurant.getAdresse());
         assertEquals("Chez Dede", restaurant.getNomResto());
@@ -34,7 +34,7 @@ public class RestaurantTest {
     public void testRestaurantWithGerant() {
         // Arrange
         Gerant gerant = new Gerant();
-        Restaurant restaurant = new Restaurant("adresse", "Chez Dede", "de 10h à 12h", "0250505050", "Bistrot");
+        Restaurant restaurant = new Restaurant("adresse", "Chez Dede", "de 10h à 12h", "0250505050", "Bistrot", null);
 
         // Configure the relationship
         restaurant.setGerant(gerant);
