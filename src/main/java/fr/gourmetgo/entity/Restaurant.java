@@ -26,13 +26,12 @@ public class Restaurant {
     public Restaurant() {
     }
 
-    public Restaurant(String adresse, String nomResto, String horaire, String numeroTel, String typeResto, String imagePath) {
+    public Restaurant(String adresse, String nomResto, String horaire, String numeroTel, String typeResto) {
         this.adresse = adresse;
         this.nomResto = nomResto;
         this.horaire = horaire;
         this.numeroTel = numeroTel;
         this.typeResto = typeResto;
-        this.imagePath = imagePath;
     }
 
     @OneToOne

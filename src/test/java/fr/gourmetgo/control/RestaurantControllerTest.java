@@ -43,7 +43,7 @@ public class RestaurantControllerTest {
     @Test
     public void testUpdateRestaurant() throws Exception {
         // Crée un objet Restaurant avec des valeurs initiales
-        Restaurant restaurant = new Restaurant("adresse", "Chez Dede", "de 10h à 12h", "0250505050", "Bistrot", null);
+        Restaurant restaurant = new Restaurant("adresse", "Chez Dede", "de 10h à 12h", "0250505050", "Bistrot");
         // Définit l'ID du restaurant
         restaurant.setId(1L);
 

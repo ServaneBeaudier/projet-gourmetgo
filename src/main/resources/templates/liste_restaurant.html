@@ -74,7 +74,6 @@
                     <th>Horaire</th>
                     <th>Téléphone</th>
                     <th>Type Resto</th>
-                    <!-- <th>Actions</th> -->
                 </tr>
             </thead>
             <tbody>
@@ -86,11 +85,6 @@
                     <td th:text="${resto.horaire}"></td>
                     <td th:text="${resto.numeroTel}"></td>
                     <td th:text="${resto.typeResto}"></td>
-                    <!-- <td>
-                        <a th:href="@{/restaurants/edit/{id}(id=${resto.id})}" class="btn btn-sm btn-warning">
-                            Modifier
-                        </a>
-                    </td> -->
                 </tr>
             </tbody>
         </table>
