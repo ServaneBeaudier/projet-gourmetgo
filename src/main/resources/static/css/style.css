@@ -1,5 +1,4 @@
 body {
-<<<<<<< HEAD
     font-family: "Lexend", sans-serif;
     font-optical-sizing: auto;
     background-color: #B8CBD0;
@@ -103,7 +102,7 @@ body {
 }
 
 /* Reprise fichier Adam */
-h1 {
+/* h1 {
     color: #333;
 }
 
@@ -133,7 +132,7 @@ button {
     border: none;
     padding: 10px;
     cursor: pointer;
-}
+} */
 
 /* CSS Vincent */
 .rectangle-membre {
@@ -170,40 +169,43 @@ button {
 }
 
 .bgd-mdp input{
-            flex: 1;
-            background-color: #B8CBD0;
-            border: 1px solid black;
+        flex: 1;
+        background-color: #B8CBD0;
+        border: 1px solid black;
 }
 
 .form-container {
-            margin: 20px;
-            max-width: 300px;
-        }
+        margin: 20px;
+        max-width: 300px;
+}
 .form-identifiant {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-        }
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+}
+
 .form-identifiant label {
-            margin-right: 40px;
-            margin-left: 100;
-            width: 105px;
-        }
+        margin-right: 40px;
+        margin-left: 100;
+        width: 105px;
+}
+
 .form-identifiant input {
-            flex: 1;
-            background-color: #B8CBD0;
-            border: 1px solid black;
-        }
+        flex: 1;
+        background-color: #B8CBD0;
+        border: 1px solid black;
+}
+
 .form-mdp {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-        }
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+}
 .form-mdp label {
             margin-top : 10px;
             margin-left: 100;
             width: 120px;
-        }
+}
 
 .nav-button-membre {
         border: 2px solid black;
@@ -215,7 +217,7 @@ button {
         width: 300px;
         height: 60px;
         align-items: center;
-    }
+}
 
 .nav-button-membre:hover {
     background-color: #006778;
@@ -231,7 +233,7 @@ button {
         width: 300px;
         height: 60px;
         align-items: center;
-    }
+}
 
 .nav-button-client:hover {
     background-color: #344D59;

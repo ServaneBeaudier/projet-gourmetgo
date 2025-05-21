@@ -90,11 +90,11 @@
 
             <!-- Colonne centrale : Image -->
             <div class="col-md-6 text-center">
-                <img th:if="${restaurant.imagePath != null and restaurant.imagePath != ''}" 
+                <img th:if="${restaurant.imageResto != null and restaurant.imageResto != ''}" 
                 th:src="@{${restaurant.imagePath}}" 
                 alt="Image du restaurant" 
                 class="image-resto img-fluid shadow" />
-                <img th:unless="${restaurant.imagePath != null and restaurant.imagePath != ''}" 
+                <img th:unless="${restaurant.imageResto != null and restaurant.imageResto != ''}" 
                 th:src="@{/images/resto-par-defaut.jpg}"
                 alt="Image par défaut" 
                 class="image-resto img-fluid shadow" />

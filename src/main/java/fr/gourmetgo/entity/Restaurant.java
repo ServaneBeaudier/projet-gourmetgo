@@ -1,58 +1,83 @@
 package fr.gourmetgo.entity;
 
+import java.time.LocalTime;
+
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GeneratedValue;  
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 
 @Entity
-@Table(name = "restaurants") 
-public class Restaurant {
+@Table(
+    name = "restaurants",
+    uniqueConstraints = @UniqueConstraint(columnNames = {"nomResto", "numRue", "nomRue", "codePostal", "ville"})
+)
 
+public class Restaurant {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String adresse;
+    @NotBlank(message = "Veuillez renseigner le nom du restaurant")
     private String nomResto;
-    private String horaire;
-    private String numeroTel;
+
+    @NotBlank(message = "Veuillez renseigner le numéro")
+    private String numRue;
+    
+    @NotBlank(message = "Veuillez renseigner la rue")
+    private String nomRue;
+    
+    @NotBlank(message = "Veuillez renseigner le code postal")
+    private String codePostal;
+    
+    @NotBlank(message = "Veuillez renseigner la ville")
+    private String ville;
+
+
+    @NotNull(message = "Veuillez renseigner l'horaire d'ouverture")
+    private LocalTime heureOuverture;
+
+    @NotNull(message = "Veuillez renseigner l'horaire de fermeture")
+    private LocalTime heureFermeture;
+
+
+    @NotBlank(message = "Veuillez renseigner le numéro de téléphone du restaurant")
+    @Pattern(regexp = "^0[1-9][0-9]{8}$", message = "Le numéro de téléphone doit contenir 10 chiffres et commencer par 0.")
+    private String telResto;
+
+    @NotBlank(message = "Veuillez renseigner le type du restaurant.")
     private String typeResto;
-    private String imagePath;
-
-    public Restaurant() {
-    }
-
-    public Restaurant(String adresse, String nomResto, String horaire, String numeroTel, String typeResto) {
-        this.adresse = adresse;
-        this.nomResto = nomResto;
-        this.horaire = horaire;
-        this.numeroTel = numeroTel;
-        this.typeResto = typeResto;
-    }
-
+ 
+    @NotBlank(message = "Veuillez renseigner l'image.")
+    private String imageResto;
+    
     @OneToOne
     @JoinColumn(name = "gerant_id")
     private Gerant gerant;
 
-    public Long getId() {
-        return id;
+    // Constructeurs
+    public Restaurant() {
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Restaurant(String nomResto, String telResto, String typeResto) {
+        this.nomResto = nomResto;
+        this.numRue = numRue;
+        this.nomRue = nomRue;
+        this.codePostal = codePostal;
+        this.ville = ville;
+        this.imageResto = imageResto;
+        this.telResto = telResto;
+        this.typeResto = typeResto;
     }
 
-    public String getAdresse() {
-        return adresse;
-    }
-
-    public void setAdresse(String adresse) {
-        this.adresse = adresse;
-    }
+    // Getters & Setters
 
     public String getNomResto() {
         return nomResto;
@@ -62,20 +87,20 @@ public class Restaurant {
         this.nomResto = nomResto;
     }
 
-    public String getHoraire() {
-        return horaire;
+    public LocalTime getHeureOuverture() {
+        return heureOuverture;
     }
 
-    public void setHoraire(String horaire) {
-        this.horaire = horaire;
+    public void setHeureOuverture(LocalTime heureOuverture) {
+        this.heureOuverture = heureOuverture;
     }
 
-    public String getNumeroTel() {
-        return numeroTel;
+    public LocalTime getHeureFermeture() {
+        return heureFermeture;
     }
 
-    public void setNumeroTel(String numeroTel) {
-        this.numeroTel = numeroTel;
+    public void setHeureFermeture(LocalTime heureFermeture) {
+        this.heureFermeture = heureFermeture;
     }
 
     public String getTypeResto() {
@@ -86,6 +111,54 @@ public class Restaurant {
         this.typeResto = typeResto;
     }
 
+    public String getImageResto() {
+        return imageResto;
+    }
+
+    public void setImageResto(String imageResto) {
+        this.imageResto = imageResto;
+    }
+
+    public String getNumRue() {
+        return numRue;
+    }
+
+    public void setNumRue(String numRue) {
+        this.numRue = numRue;
+    }
+
+    public String getNomRue() {
+        return nomRue;
+    }
+
+    public void setNomRue(String nomRue) {
+        this.nomRue = nomRue;
+    }
+
+    public String getCodePostal() {
+        return codePostal;
+    }
+
+    public void setCodePostal(String codePostal) {
+        this.codePostal = codePostal;
+    }
+
+    public String getVille() {
+        return ville;
+    }
+
+    public void setVille(String ville) {
+        this.ville = ville;
+    }
+
+    public String getTelResto() {
+        return telResto;
+    }
+
+    public void setTelResto(String telResto) {
+        this.telResto = telResto;
+    }
+
     public Gerant getGerant() {
         return gerant;
     }
@@ -94,17 +167,23 @@ public class Restaurant {
         this.gerant = gerant;
     }
 
-    public String getImagePath() {
-        return imagePath;
+    public Long getId() {
+        return id;
     }
 
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-   
+    
 
     
 
     
 }
+
+
+
+
+
+   

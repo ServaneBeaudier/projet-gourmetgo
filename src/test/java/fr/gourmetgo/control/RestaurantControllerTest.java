@@ -15,6 +15,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import fr.gourmetgo.controller.RestaurantController;
 import fr.gourmetgo.entity.Restaurant;
 import fr.gourmetgo.service.RestaurantService;
 
@@ -43,7 +44,7 @@ public class RestaurantControllerTest {
     @Test
     public void testUpdateRestaurant() throws Exception {
         // Crée un objet Restaurant avec des valeurs initiales
-        Restaurant restaurant = new Restaurant("adresse", "Chez Dede", "de 10h à 12h", "0250505050", "Bistrot");
+        Restaurant restaurant = new Restaurant();
         // Définit l'ID du restaurant
         restaurant.setId(1L);
 
