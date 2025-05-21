@@ -27,12 +27,22 @@ public Restaurant trouverRestaurantParId(Long idResto) {
     return appRepository.findById(idResto).orElse(null); //  Retourne le restaurant ou `null` s'il n'existe pas
 }
 
- public boolean restaurantExists(Restaurant restaurant) {
+ /*public boolean restaurantExists(Restaurant restaurant) {
         Optional<Restaurant> existing = appRepository.findByNomRestoAndAdresse(
             restaurant.getNomResto(), restaurant.getAdresse());
-        return existing.isPresent();
+        return existing.isPresent();*/
+        public boolean restaurantExists(Restaurant restaurant) {
+    Optional<Restaurant> existing = appRepository.findByNomRestoAndCodePostalAndVilleAndNomRueAndNumRue(
+        restaurant.getNomResto(),
+        restaurant.getCodePostal(),
+        restaurant.getVille(),
+        restaurant.getNomRue(),
+        restaurant.getNumRue()
+    );
+    return existing.isPresent();
+}
     }
 
 
-}
+
 

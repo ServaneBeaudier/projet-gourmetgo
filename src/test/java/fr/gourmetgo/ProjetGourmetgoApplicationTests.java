@@ -21,8 +21,10 @@ public class ProjetGourmetgoApplicationTests {
     void testEnregistrementRestaurant() {
         Restaurant resto = new Restaurant();
         resto.setNomResto("Chez Dédé");
-        resto.setAdresse("12 rue aux hasards, Paris");
-        resto.setHoraires("10h-22h");
+        resto.setNumRue("12");
+        resto.setNomRue("Rue de la Paix");
+        resto.setVille("Paris");
+        resto.setCodePostal("75002");          
         resto.setTelResto("0159897451");
         resto.setTypeResto("Italien");
 

@@ -1,165 +1,218 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Inscription Restaurant</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <style>
-        body {
-            background-color: #B8CBD0; /* Fond du site */
-        }
-        .container {
-            width: 90%;
-            max-width: none;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0);
-        }
-        label {
-            color: #000000; /* Couleur noire pour "Nom du restaurant" */
-        }
-        .btn-custom {
-            background-color: #7A90A4; /* Couleur bouton */
-            border-color: #7A90A4;
-            color: white;
-            width: 50%;
-        }
-        .form-control {
-            background-color: #FFFFFF; /* Champs en blanc */
-            border: 1px solid #709CA7; /* Bordures en #709CA7 */
-        }
-        .encadre {
-            background-color: #709CA7; /* Encadré des champs */
-            padding: 15px;
-            border-radius: 10px;
-        }
-        .image-placeholder {
-            background-color: #709CA7; /*Fond du carré */
-            width: 450px; /* Carré parfait */
-            height: 450px; /* Hauteur égale à largeur */
-            border-radius: 10px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        .image-placeholder input {
-            width: 80%;
-            text-align: center;
-        }
-        .image-placeholder label {
-            font-weight: bold;
-            margin-bottom: 10px;
-            color: white;
-        }
-
-        
-  
-</style>
-
-    </style>
+  <meta charset="UTF-8">
+  <title>Inscription Restaurant</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #B8CBD0;
+    }
+    .container {
+      width: 90%;
+      max-width: none;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0);
+    }
+    label {
+      color: #000000;
+    }
+    .btn-custom {
+      background-color: #7A90A4;
+      border-color: #7A90A4;
+      color: white;
+      width: 50%;
+    }
+    .form-control {
+      background-color: #FFFFFF;
+      border: 1px solid #709CA7;
+    }
+    .encadre {
+      background-color: #709CA7;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+    .image-placeholder {
+      background-color: #709CA7;
+      width: 450px;
+      height: 450px;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .image-placeholder input {
+      width: 80%;
+      text-align: center;
+    }
+    .image-placeholder label {
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: white;
+    }
+  </style>
 </head>
 <body>
-    <div class="container mt-5">
-        <form action="/restaurants/formulaire" method="post" class="p-4 shadow rounded" th:object="${restaurant}">
-            
-            <!-- Nom du restaurant bien centré au-dessus du carré -->
-            <div class="text-center mb-4">
-                <label for="nomResto" class="form-label h4">Nom du restaurant :</label>
-                <input type="text" id="nomResto" name="nomResto" class="form-control w-50 mx-auto" th:field="*{nomResto}">
-                <div class="text-danger" th:if="${#fields.hasErrors('nomResto')}" th:errors="*{nomResto}"></div> <!-- Affiche l'erreur -->
-            </div>
+  <div class="container mt-5">
+    <!-- Ajout de l'attribut enctype pour la requête multipart -->
+    <form action="/restaurants/formulaire" method="post" class="p-4 shadow rounded" th:object="${restaurant}">
+      <!-- Nom du restaurant -->
+      <div class="text-center mb-4">
+        <label for="nomResto" class="form-label h4">Nom du restaurant :</label>
+        <input type="text" id="nomResto" name="nomResto" class="form-control w-50 mx-auto"
+               th:field="*{nomResto}">
+        <div class="text-danger" th:if="${#fields.hasErrors('nomResto')}" th:errors="*{nomResto}"></div>
+      </div>
 
-            <div class="row align-items-center">
-                <!-- Champs à gauche -->
-                <div class="col-md-4">
-                    <div class="encadre mb-3">
-  <label for="typeResto" class="form-label">Type de restaurant :</label>
-  <select id="typeResto" name="typeResto" class="form-control custom-select" th:field="*{typeResto}" onchange="toggleAutre(this)">
-     <option value="" disabled th:selected="${restaurant.typeResto == null or restaurant.typeResto == ''}">-- Choisissez un type --</option>
-     <option value="Italien">Vietnamien Haumont</option>
-     <option value="Français">Grec</option>
-     <option value="Mexicain">Libanais</option>
-     <option value="Chinois">Dessert</option>
-     <option value="Italien">Italien</option>
-     <option value="Français">Halal</option>
-     <option value="Mexicain">Thaï</option>
-     <option value="Chinois">Indien</option>
-     <option value="Italien">Mexicain</option>
-     <option value="Français">Japonais</option>
-     <option value="Mexicain">Chinois</option>
-     <option value="Chinois">Petit Déjeuner</option>
-     <option value="Italien">Végétarien</option>
-     <option value="Français">Sushi</option>
-     <option value="Mexicain">Américain</option>
-     <option value="Chinois">Pizza</option>
-     <option value="Autre">Autre</option>
-  </select>
-  <div class="text-danger" th:if="${#fields.hasErrors('typeResto')}" th:errors="*{typeResto}"></div>
-</div>
+      <!-- Système de grille sur 12 colonnes : 3 colonnes de col-md-4 -->
+      <div class="row align-items-center">
+        <!-- Colonne gauche : informations générales et adresse -->
+        <div class="col-md-4">
+          <!-- Type de restaurant -->
+          <div class="encadre">
+            <label for="typeResto" class="form-label">Type de restaurant :</label>
+            <select id="typeResto" name="typeResto" class="form-control custom-select"
+                    th:field="*{typeResto}" onchange="toggleAutre(this)">
+              <option value="" disabled th:selected="${restaurant.typeResto == null or restaurant.typeResto == ''}">
+                -- Choisissez un type --
+              </option>
+              <option value="Italien">Vietnamien Spécialité Haumont</option>
+              <option value="Français">Grec</option>
+              <option value="Mexicain">Libanais</option>
+              <option value="Chinois">Dessert</option>
+              <option value="Italien">Italien</option>
+              <option value="Français">Halal</option>
+              <option value="Mexicain">Thaï</option>
+              <option value="Chinois">Indien</option>
+              <option value="Italien">Mexicain</option>
+              <option value="Français">Japonais</option>
+              <option value="Mexicain">Chinois</option>
+              <option value="Chinois">Petit Déjeuner</option>
+              <option value="Italien">Végétarien</option>
+              <option value="Français">Sushi</option>
+              <option value="Mexicain">Américain</option>
+              <option value="Chinois">Pizza</option>
+              <option value="Autre">Autre</option>
+            </select>
+            <div class="text-danger" th:if="${#fields.hasErrors('typeResto')}" th:errors="*{typeResto}"></div>
+          </div>
+          
+          <!-- Champ "Autre" -->
+          <div id="autreDiv" class="encadre" style="display: none;">
+            <label for="autreType" class="form-label">Précisez le type de restaurant :</label>
+            <input type="text" id="autreType" name="autreType" class="form-control" />
+          </div>
+          <script>
+            function toggleAutre(selectObj) {
+              var autreDiv = document.getElementById("autreDiv");
+              if (selectObj.value === "Autre") {
+                autreDiv.style.display = "block";
+              } else {
+                autreDiv.style.display = "none";
+              }
+            }
+          </script>
 
+          <!-- Adresse : Numéro, Rue, Code postal, Ville -->
+          <div class="encadre">
+            <label for="numRue" class="form-label">Numéro de rue :</label>
+            <input type="text" id="numRue" name="numRue" class="form-control"
+                   th:field="*{numRue}" placeholder="ex : 123">
+            <div class="text-danger" th:if="${#fields.hasErrors('numRue')}" th:errors="*{numRue}"></div>
 
+            <label for="nomRue" class="form-label">Nom de la rue :</label>
+            <input type="text" id="nomRue" name="nomRue" class="form-control"
+                   th:field="*{nomRue}" placeholder="ex : Rue des Flèches Droites">
+            <div class="text-danger" th:if="${#fields.hasErrors('nomRue')}" th:errors="*{nomRue}"></div>
 
+            <label for="codePostal" class="form-label">Code postal :</label>
+            <input type="text" id="codePostal" name="codePostal" class="form-control"
+                   th:field="*{codePostal}" placeholder="ex : 75001">
+            <div class="text-danger" th:if="${#fields.hasErrors('codePostal')}" th:errors="*{codePostal}"></div>
+          
+            <label for="ville" class="form-label">Ville :</label>
+            <input type="text" id="ville" name="ville" class="form-control"
+                   th:field="*{ville}" readonly placeholder="La ville s'affichera automatiquement">
+            <div class="text-danger" th:if="${#fields.hasErrors('ville')}" th:errors="*{ville}"></div>
+          </div>
+          
+          <!-- Téléphone -->
+          <div class="encadre">
+            <label for="telResto" class="form-label">Téléphone :</label>
+            <input type="text" id="telResto" name="telResto" class="form-control"
+                   th:field="*{telResto}">
+            <div class="text-danger" th:if="${#fields.hasErrors('telResto')}" th:errors="*{telResto}"></div>
+          </div>
 
+          <!-- Horaire : Heures d'ouverture et de fermeture -->
+          <div class="encadre">
+            <label for="heureOuverture" class="form-label">Heure d'ouverture :</label>
+            <input type="time" id="heureOuverture" name="heureOuverture" class="form-control"
+                   th:field="*{heureOuverture}">
+            <div class="text-danger" th:if="${#fields.hasErrors('heureOuverture')}" th:errors="*{heureOuverture}"></div>
 
-                      <!-- Champ texte pour "Autre" qui est masqué par défaut -->
-                    <div id="autreDiv" class="encadre mb-3" style="display: none;">
-                      <label for="autreType" class="form-label">Précisez le type de restaurant :</label>
-                      <input type="text" id="autreType" name="autreType" class="form-control" />
-                    </div>
-<script>
-    function toggleAutre(selectObj) {
-        var autreDiv = document.getElementById("autreDiv");
-        if (selectObj.value === "Autre") {
-            autreDiv.style.display = "block";
-        } else {
-            autreDiv.style.display = "none";
-        }
-    }
-</script>
-
-
-
-                    <div class="encadre mb-3">
-                        <label for="adresse" class="form-label">Adresse :</label>
-                        <input type="text" id="adresse" name="adresse" class="form-control" th:field="*{adresse}">
-                        <div class="text-danger" th:if="${#fields.hasErrors('adresse')}" th:errors="*{adresse}"></div> <!-- Affiche l'erreur -->
-
-                        <label for="telResto" class="form-label mt-3">Téléphone :</label>
-                        <input type="text" id="telResto" name="telResto" class="form-control" th:field="*{telResto}">
-                        <div class="text-danger" th:if="${#fields.hasErrors('telResto')}" th:errors="*{telResto}"></div> <!-- Affiche l'erreur -->
-                    </div>
-
-                    <div class="encadre mb-3">
-                        <label for="horaires" class="form-label">Horaires :</label>
-                        <input type="text" id="horaires" name="horaires" class="form-control" th:field="*{horaires}">
-                        <div class="text-danger" th:if="${#fields.hasErrors('horaires')}" th:errors="*{horaires}"></div> <!-- Affiche l'erreur -->
-                    </div>
-                </div>
-
-                <!-- Carré au centre, parfaitement carré avec upload image -->
-                <div class="col-md-4 d-flex justify-content-center">
-                    <div class="image-placeholder">
-                        <label for="imageResto" class="form-label text-white">Ajouter une image :</label>
-                        <input type="file" id="imageResto" name="imageResto" class="form-control" accept="image/*">
-                        <div class="text-danger" th:if="${#fields.hasErrors('imageResto')}" th:errors="*{imageResto}"></div> <!-- Affiche l'erreur -->
-                    </div>
-
-                    <div class="text-danger" th:if="${#fields.hasGlobalErrors()}">
-                        <p th:each="err : ${#fields.globalErrors()}" th:text="${err}"></p>
-                    </div>
-
-                </div>
-
-                <!-- Bouton tout à droite au milieu -->
-                <div class="col-md-3 d-flex flex-column align-items-center">
-                  <button type="submit" class="btn btn-custom mb-2">Valider</button>
-                  <a href="/restaurants/formulaire" class="btn btn-custom">Réinitialiser</a>
-                </div>
-            </div>
-        </form>
-    </div>
+            <label for="heureFermeture" class="form-label">Heure de fermeture :</label>
+            <input type="time" id="heureFermeture" name="heureFermeture" class="form-control"
+                   th:field="*{heureFermeture}">
+            <div class="text-danger" th:if="${#fields.hasErrors('heureFermeture')}" th:errors="*{heureFermeture}"></div>
+          </div>
+        </div>
+        
+        <!-- Colonne centrale : Image -->
+        <div class="col-md-4 d-flex justify-content-center">
+          <div class="image-placeholder">
+            <label for="imageResto" class="form-label text-white">Ajouter une image :</label>
+            <input type="file" id="imageResto" name="imageResto" class="form-control" accept="image/*">
+            <div class="text-danger" th:if="${#fields.hasErrors('imageResto')}" th:errors="*{imageResto}"></div>
+          </div>
+          <div class="text-danger" th:if="${#fields.hasGlobalErrors()}">
+            <p th:each="err : ${#fields.globalErrors()}" th:text="${err}"></p>
+          </div>
+        </div>
+        
+        <!-- Colonne droite : Boutons -->
+        <div class="col-md-4 d-flex flex-column align-items-center">
+          <button type="submit" class="btn btn-custom mb-2">Valider</button>
+          <a href="/restaurants/formulaire" class="btn btn-custom">Réinitialiser</a>
+        </div>
+      </div>
+    </form>
+  </div>
+  
+  <!-- Footer -->
+  <footer class="text-center mt-5 mb-3">
+    &copy; 2025 - GourmetGo
+  </footer>
+  
+  <script>
+    document.getElementById("codePostal").addEventListener("blur", function() {
+      var cp = this.value.trim();
+      if (cp !== "") {
+        fetch("https://geo.api.gouv.fr/communes?codePostal=" + cp)
+          .then(function(response) {
+            if (!response.ok) {
+              throw new Error("Erreur lors de la récupération des données");
+            }
+            return response.json();
+          })
+          .then(function(data) {
+            if (data.length > 0) {
+              document.getElementById("ville").value = data[0].nom;
+            } else {
+              document.getElementById("ville").value = "";
+            }
+          })
+          .catch(function(error) {
+            console.error("Erreur lors de la récupération de la ville :", error);
+            document.getElementById("ville").value = "";
+          });
+      } else {
+        document.getElementById("ville").value = "";
+      }
+    });
+  </script>
 </body>
 </html>
-
-

@@ -11,14 +11,20 @@
         <div class="card p-4 shadow">
             <h2 th:text="${restaurant.nomResto}"></h2>
             <p><strong>ID du restaurant :</strong> <span th:text="${restaurant.idResto}"></span></p>
-            <p><strong>Adresse :</strong> <span th:text="${restaurant.adresse}"></span></p>
-            <p><strong>Horaires :</strong> <span th:text="${restaurant.horaires}"></span></p>
+            
+            
+            <p><strong>Adresse :</strong> <span th:text="|${restaurant.numRue} ${restaurant.nomRue}, ${restaurant.codePostal} ${restaurant.ville}|"></span></p>
+            
             <p><strong>Téléphone :</strong> <span th:text="${restaurant.telResto}"></span></p>
             <p><strong>Type :</strong> <span th:text="${restaurant.typeResto}"></span></p>
+
+         <div th:if="${restaurant.imageResto != null and restaurant.imageResto != ''}">
+            <img th:src="${restaurant.imageResto}" alt="Image du restaurant" class="img-fluid" style="max-height: 300px;">
+        </div>
             
 
         </div>
-        <a href="/restaurants/formulaire" class="btn btn-primary mt-3">Modifier</a>
+        <a href="/restaurants/formulaire" class="btn btn-primary mt-3">creer un nouveau restaurant</a>
     </div>
 </body>
 </html>
