@@ -36,10 +36,10 @@ public class RestaurantController {
         return "accueilGR"; 
     }
 
-    @GetMapping("/dashboard")
-    public String connexionOK() {
-        return "dashboard"; 
-    }
+    // @GetMapping("/dashboard")
+    // public String connexionOK() {
+    //     return "dashboard"; 
+    // }
 
     @GetMapping("/restaurants/formulaire")
     public String afficherFormulaire(Model model) {
@@ -51,19 +51,12 @@ public class RestaurantController {
 
 
    @PostMapping("/formulaire")
-public String inscrireRestaurant(@Valid @ModelAttribute("restaurant") Restaurant restaurant,
+    public String inscrireRestaurant(@Valid @ModelAttribute("restaurant") Restaurant restaurant,
                                  BindingResult result,
                                  @RequestParam("imageFile") MultipartFile imageFile,
                                  Model model) {
-    if (result.hasErrors()) {
-        return "formulaire";
-    }
 
-    if (restaurantService.restaurantExists(restaurant)) {
-        result.reject("duplicate", "Ce restaurant existe déjà.");
-        return "formulaire";
-    }
-
+    // 1. Gestion de l'image d'abord
     if (!imageFile.isEmpty()) {
         try {
             String fileName = UUID.randomUUID() + "_" + imageFile.getOriginalFilename();
@@ -73,17 +66,32 @@ public String inscrireRestaurant(@Valid @ModelAttribute("restaurant") Restaurant
             }
             Path filePath = uploadDir.resolve(fileName);
             Files.copy(imageFile.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
-            restaurant.setImageResto("/uploads/" + fileName);
+            restaurant.setImageResto("/uploads/" + fileName); // Affecte ici AVANT la validation
         } catch (IOException e) {
             e.printStackTrace();
             model.addAttribute("uploadError", "Erreur lors de l'envoi de l'image.");
             return "formulaire";
         }
+    } else {
+        result.rejectValue("imageResto", "imageFile.empty", "Veuillez ajouter une image.");
     }
 
+    // 2. Ensuite seulement on valide
+    if (result.hasErrors()) {
+        return "formulaire";
+    }
+
+    // 3. Vérifie si le restaurant existe déjà
+    if (restaurantService.restaurantExists(restaurant)) {
+        result.reject("duplicate", "Ce restaurant existe déjà.");
+        return "formulaire";
+    }
+
+    // 4. Sauvegarde
     Restaurant nouveauRestaurant = restaurantService.enregistrerRestaurant(restaurant);
     return "redirect:/admin/success?restaurantId=" + nouveauRestaurant.getId();
-}
+    }
+
 
 
     @GetMapping("/success")
@@ -107,45 +115,54 @@ public String inscrireRestaurant(@Valid @ModelAttribute("restaurant") Restaurant
     }
 
     @GetMapping("/restaurants/edit/{id}")
-    public String showEditForm(@PathVariable("id") long id, Model model) {
+    public String showEditForm(@PathVariable("id") Long id, Model model) {
         Restaurant restaurant = restaurantService.getRestaurantById(id);
         model.addAttribute("restaurant", restaurant);
         return "edit_restaurant";
     }
 
     @PostMapping("/restaurants/update")
-    public String updateRestaurant(@ModelAttribute("restaurant") Restaurant restaurant,
-                               @RequestParam("image") MultipartFile imageFile) {
-    // Vérifie si une image a été envoyée
+    public String updateRestaurant(
+        @ModelAttribute("restaurant") Restaurant restaurant,
+        @RequestParam("imageFile") MultipartFile imageFile) {
+
+    // Charger le restaurant existant
+    Restaurant restaurantEnBase = restaurantService.getRestaurantById(restaurant.getId());
+
     if (!imageFile.isEmpty()) {
         try {
-            // Crée un nom unique pour l'image
             String fileName = UUID.randomUUID() + "_" + imageFile.getOriginalFilename();
 
-            // Définit le dossier d'upload
-            Path uploadDir = Paths.get("uploads"); // à la racine du projet
+            Path uploadDir = Paths.get("uploads");
             if (!Files.exists(uploadDir)) {
                 Files.createDirectories(uploadDir);
             }
 
-            // Enregistre le fichier sur le disque
             Path filePath = uploadDir.resolve(fileName);
             Files.copy(imageFile.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
 
-            // Met à jour le chemin de l’image dans l’objet
-            restaurant.setImageResto("/uploads/" + fileName); // Chemin relatif pour le front
+            // Mettre à jour le chemin de l'image dans l'objet temporaire
+            restaurant.setImageResto("/uploads/" + fileName);
 
         } catch (IOException e) {
             e.printStackTrace();
-            // Tu peux ici rediriger vers une page d'erreur ou afficher un message
+            // Tu peux ajouter un message d’erreur ici si tu veux
         }
+    } else {
+        // Si pas de nouvelle image, garde l’ancienne dans l’objet à envoyer au service
+        restaurant.setImageResto(restaurantEnBase.getImageResto());
     }
 
-    // Appel du service pour mettre à jour
     restaurantService.updateRestaurant(restaurant);
 
     return "redirect:/admin/list/" + restaurant.getId();
-    }
+}
+
+
+
+
+
+
 
     
 

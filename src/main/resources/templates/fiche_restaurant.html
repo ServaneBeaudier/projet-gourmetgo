@@ -16,13 +16,13 @@
     <main class="flex-grow-1">
 
     <!-- Titre centré -->
-    <div class="titrepage text-center py-1">
+    <div class="titrepage text-center py-1 fixed-top">
         <h3>Tableau de bord</h3>
     </div>
 
     <!-- PREMIERE NAVBAR -->
     <!-- à placer en dehors du container pour prendre toute la page -->
-    <nav class="navbar navbar-expand-md navbar-custom py-1">
+    <nav class="navbar navbar-expand-md navbar-custom py-1 fixed-top" style="top: 48px">
         <div class="container-fluid justify-content-between">
 
             <!-- Bouton burger -->
@@ -45,7 +45,7 @@
     </nav>
 
     <!-- DEUXIEME NAV BAR -->
-    <nav class="navbar navbar-expand-md navbar-custom2 py-1">
+    <nav class="navbar navbar-expand-md navbar-custom2 py-1 fixed-top" style="top: 96px">
         <div class="container-fluid justify-content-between">
             <!-- Bouton burger -->
             <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarButtons"
@@ -56,7 +56,7 @@
             <!-- Contenu à cacher/afficher -->
             <div class="collapse navbar-collapse justify-content-center" id="navbarButtons">
                 <div class="d-flex flex-column flex-md-row gap-2 mt-3 mt-md-0">
-                    <a href="/admin/restaurants" class="btn button-accueilGR">Créer un compte restaurant</a>
+                    <a href="/admin/restaurants/formulaire" class="btn button-accueilGR">Créer un compte restaurant</a>
                     <a href="/admin/clients" class="btn button-accueilGR">Rechercher un restaurant</a>
                     <a href="/admin/list" class="btn button-accueilGR">Liste des restaurants</a>
                 </div>
@@ -77,13 +77,22 @@
                     <p><strong>Type :</strong> <span th:text="${restaurant.typeResto}">Italien</span></p>
                 </div>
                 <div class="info-bloc">
-                    <p><strong>Adresse :</strong> <span th:text="${restaurant.adresse}">123 rue X</span></p>
+                    <p><strong>Adresse :</strong><br>
+                        <span th:text="${restaurant.numRue}">123</span>,
+                        <span th:text="${restaurant.nomRue}">rue Exemple</span><br>
+                        <span th:text="${restaurant.codePostal}">75000</span>
+                        <span th:text="${restaurant.ville}">Paris</span>
+                    </p>
                 </div>
                 <div class="info-bloc">
-                    <p><strong>Téléphone :</strong> <span th:text="${restaurant.numeroTel}">0123456789</span></p>
+                    <p><strong>Téléphone :</strong> <span th:text="${restaurant.telResto}">0123456789</span></p>
                 </div>
                 <div class="info-bloc">
-                    <p><strong>Horaire :</strong> <span th:text="${restaurant.horaire}">12h-22h</span></p>
+                    <p><strong>Horaire :</strong>
+                        <span th:text="${restaurant.heureOuverture}">12h-22h</span>
+                         -
+                        <span th:text="${restaurant.heureFermeture}">12h-22h</span>
+                    </p>
                 </div>
                 
             </div>
@@ -91,7 +100,7 @@
             <!-- Colonne centrale : Image -->
             <div class="col-md-6 text-center">
                 <img th:if="${restaurant.imageResto != null and restaurant.imageResto != ''}" 
-                th:src="@{${restaurant.imagePath}}" 
+                th:src="@{${restaurant.imageResto}}" 
                 alt="Image du restaurant" 
                 class="image-resto img-fluid shadow" />
                 <img th:unless="${restaurant.imageResto != null and restaurant.imageResto != ''}" 

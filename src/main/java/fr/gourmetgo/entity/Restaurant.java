@@ -55,8 +55,10 @@ public class Restaurant {
     @NotBlank(message = "Veuillez renseigner le type du restaurant.")
     private String typeResto;
  
-    @NotBlank(message = "Veuillez renseigner l'image.")
+    //@NotBlank(message = "Veuillez renseigner l'image.")
     private String imageResto;
+
+    private String autreType;
     
     @OneToOne
     @JoinColumn(name = "gerant_id")
@@ -175,8 +177,16 @@ public class Restaurant {
         this.id = id;
     }
 
-    
+    public String getAutreType() {
+        return autreType;
+    }
 
+    public void setAutreType(String autreType) {
+        this.autreType = autreType;
+    }
+
+    
+    
     
 
     

@@ -56,7 +56,7 @@
             <!-- Contenu à cacher/afficher -->
             <div class="collapse navbar-collapse justify-content-center" id="navbarButtons">
                 <div class="d-flex flex-column flex-md-row gap-2 mt-3 mt-md-0">
-                    <a href="/admin/restaurants" class="btn button-accueilGR">Créer un compte restaurant</a>
+                    <<a href="/admin/restaurants/formulaire" class="btn button-accueilGR">Créer un compte restaurant</a>
                     <a href="/admin/clients" class="btn button-accueilGR">Rechercher un restaurant</a>
                     <a href="/admin/list" class="btn button-accueilGR">Liste des restaurants</a>
                 </div>
@@ -78,12 +78,11 @@
             <tbody>
                 <tr th:each="resto : ${restaurants}">
                     <td>
-                        <a th:href="@{/admin/list/{id}(id=${resto.id})}" th:text="${resto.nomResto}"></a>
+                        <a th:href="@{/admin/list/{id}(id=${resto.id})}" th:text="${resto.nomResto}" class="resto-link"></a>
                     </td>
-                    <td th:text="${resto.numRue}"></td>
-                    <td th:text="${resto.nomRue}"></td>
-                    <td th:text="${resto.codePostal}"></td>
-                    <td th:text="${resto.ville}"></td>
+                    <td>
+                        <span th:text="${resto.numRue} + ' ' + ${resto.nomRue} + ', ' + ${resto.codePostal} + ' ' + ${resto.ville}"></span>
+                    </td>
                     <td th:text="${resto.telResto}"></td>
                     <td th:text="${resto.typeResto}"></td>
                 </tr>

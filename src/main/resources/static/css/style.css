@@ -45,7 +45,7 @@ body {
     color : white;
 }
 
-/* fichez_restaurant */
+/* fiche_restaurant */
 .fiche-container {
     margin-top: 40px;
 }
@@ -79,6 +79,17 @@ body {
     font-weight: bold;
     background-color: #7A90A4;
     color : white;
+}
+
+/* Page liste restaurant */
+.resto-link{
+    text-decoration: none;
+    color : black;
+}
+
+.resto-link:hover {
+    color: #344D59;
+    text-decoration: underline;
 }
 
 /* Page modification */

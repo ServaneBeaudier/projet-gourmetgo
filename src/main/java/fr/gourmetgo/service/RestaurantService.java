@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import fr.gourmetgo.entity.Restaurant;
 import fr.gourmetgo.repository.RestaurantRepository;
+import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class RestaurantService {
@@ -19,8 +20,29 @@ public class RestaurantService {
         return restaurantRepo.findById(id).orElse(null);
     }
 
-    public Restaurant updateRestaurant(Restaurant restaurant){
-        return restaurantRepo.save(restaurant);
+    public void updateRestaurant(Restaurant restaurant){
+        Restaurant restaurantEnBase = restaurantRepo.findById(restaurant.getId())
+                .orElseThrow(() -> new EntityNotFoundException("Restaurant non trouvé"));
+
+        // Mise à jour manuelle des champs modifiables
+        restaurantEnBase.setNomResto(restaurant.getNomResto());
+        restaurantEnBase.setVille(restaurant.getVille());
+        restaurantEnBase.setCodePostal(restaurant.getCodePostal());
+        restaurantEnBase.setTelResto(restaurant.getTelResto());
+        restaurantEnBase.setTypeResto(restaurant.getTypeResto());
+        restaurantEnBase.setHeureOuverture(restaurant.getHeureOuverture());
+        restaurantEnBase.setHeureFermeture(restaurant.getHeureFermeture());
+        restaurantEnBase.setAutreType(restaurant.getAutreType());
+        restaurantEnBase.setNomRue(restaurant.getNomRue());
+        restaurantEnBase.setNumRue(restaurant.getNumRue());
+        restaurantEnBase.setGerant(restaurant.getGerant());
+
+        // Mise à jour conditionnelle de l'image (ne pas écraser si null)
+        if (restaurant.getImageResto() != null) {
+            restaurantEnBase.setImageResto(restaurant.getImageResto());
+        }
+
+        restaurantRepo.save(restaurantEnBase);
     }
 
     public Restaurant enregistrerRestaurant(Restaurant restaurant) {
