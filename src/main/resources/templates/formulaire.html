@@ -71,7 +71,7 @@
                     <div class="encadre mb-3">
                         <label for="typeResto" class="form-label">Type de restaurant :</label>
                         <input type="text" id="typeResto" name="typeResto" class="form-control" th:field="*{typeResto}">
-                        <div class="text-danger" th:if="${#fields.hasErrors('typeResto')}" th:errors="*{typeResto}"></div> <!-- Affiche l'erreur -->
+                        <div class="text-danger" th:if="${#fields.hasErrors('nomResto')}" th:errors="*{nomResto}"></div> <!-- Affiche l'erreur -->
                     </div>
 
                     <div class="encadre mb-3">
@@ -98,11 +98,17 @@
                         <input type="file" id="imageResto" name="imageResto" class="form-control" accept="image/*">
                         <div class="text-danger" th:if="${#fields.hasErrors('imageResto')}" th:errors="*{imageResto}"></div> <!-- Affiche l'erreur -->
                     </div>
+
+                    <div class="text-danger" th:if="${#fields.hasGlobalErrors()}">
+                        <p th:each="err : ${#fields.globalErrors()}" th:text="${err}"></p>
+                    </div>
+
                 </div>
 
                 <!-- Bouton tout à droite au milieu -->
-                <div class="col-md-3 d-flex align-items-center justify-content-end">
-                    <button type="submit" class="btn btn-custom">Valider</button>
+                <div class="col-md-3 d-flex flex-column align-items-center">
+                  <button type="submit" class="btn btn-custom mb-2">Valider</button>
+                  <a href="/restaurants/formulaire" class="btn btn-custom">Réinitialiser</a>
                 </div>
             </div>
         </form>
