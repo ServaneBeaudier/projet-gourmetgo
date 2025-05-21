@@ -19,25 +19,25 @@ public class AuthController {
     return "home";
     }
 
-    @GetMapping("/login")
+    @GetMapping("/login2")
     public String loginForm() {
-    return "login";
+    return "login2";
     }
 
-    @PostMapping("/login")
+    @PostMapping("/login2")
     public String login(@RequestParam String username, @RequestParam String password, HttpSession session, Model model) {
         if (authService.authenticate(username, password)) {
         session.setAttribute("user", authService.findUser(username));
         return "redirect:/dashboard";
     } else {
         model.addAttribute("error", "Identifiants invalides !");
-        return "login";
+        return "login2";
         }
     }
     @GetMapping("/dashboard")
     public String dashboard(HttpSession session) {
         if (session.getAttribute("user") == null) {
-        return "redirect:/login";
+        return "redirect:/login2";
         }
         return "dashboard";
         }
@@ -45,6 +45,6 @@ public class AuthController {
     @GetMapping("/logout")
     public String logout(HttpSession session) {
     session.invalidate();
-    return "redirect:/login";
+    return "redirect:/login2";
     }
 }

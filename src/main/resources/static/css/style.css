@@ -5,14 +5,43 @@ body {
     background-color: #B8CBD0;
 }
 
-.rectangle {
+.rectangle-membre {
+    border: 2px solid black;
+    border-radius: 15px;
+    padding: 8px 20px;
+    font-weight: bold;
+    background-color: #B8CBD0;
+    color : black;
+    width: 400px;
+    height: 250px;
+}
+
+.rectangle-client {
+    border: 2px solid black;
     border-radius: 15px;
     padding: 8px 20px;
     font-weight: bold;
     background-color: #709CA7;
+    color : black;
+    width: 400px;
+    height: 250px;
+}
+
+.rectangle-restaurant {
+    border: 2px solid black;
+    border-radius: 15px;
+    padding: 8px 20px;
+    font-weight: bold;
+    background-color: #344D59;
     color : white;
     width: 400px;
     height: 250px;
+}
+
+.bgd-mdp input{
+            flex: 1;
+            background-color: #B8CBD0;
+            border: 1px solid black;
 }
 
 .form-container {
@@ -31,6 +60,8 @@ body {
         }
 .form-identifiant input {
             flex: 1;
+            background-color: #B8CBD0;
+            border: 1px solid black;
         }
 .form-mdp {
             display: flex;
@@ -39,15 +70,12 @@ body {
         }
 .form-mdp label {
             margin-top : 10px;
-/*             margin-right: 10px; */
             margin-left: 100;
             width: 120px;
         }
-.form-mdp input {
-            flex: 1;
-        }
 
-.nav-button {
+.nav-button-membre {
+        border: 2px solid black;
         border-radius: 15px;
         padding: 8px 20px;
         font-weight: bold;
@@ -58,33 +86,38 @@ body {
         align-items: center;
     }
 
-.nav-button:hover {
+.nav-button-membre:hover {
     background-color: #006778;
 }
 
-/* .custom-img {
-            max-width: 100%;
-            height: auto;
-        } 
+.nav-button-client {
+        border: 2px solid black;
+        border-radius: 15px;
+        padding: 8px 20px;
+        font-weight: bold;
+        background-color: #7A90A4;
+        color : white;
+        width: 300px;
+        height: 60px;
+        align-items: center;
+    }
 
- .navbar-custom {
-    background-color: #709CA7;
-}
-
-
-
-.btn-deconnexion {
+.nav-button-client:hover {
     background-color: #344D59;
-    border: none;
-    border-radius: 15px;
-    padding: 8px 20px;
-    font-weight: bold;
-    color : white;
-}
-.btn-deconnexion:hover {
-    background-color: #2c3438;
 }
 
-.titrepage {
+.nav-button-restaurant {
+        border: 2px solid black;
+        border-radius: 15px;
+        padding: 8px 20px;
+        font-weight: bold;
+        background-color: #7A90A4;
+        color : white;
+        width: 300px;
+        height: 60px;
+        align-items: center;
+    }
+
+.nav-button-restaurant:hover {
     background-color: #709CA7;
-} */
+}
