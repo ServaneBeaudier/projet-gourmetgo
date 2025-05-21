@@ -6,6 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import fr.gourmetgo.entity.Administrateur;
+import fr.gourmetgo.entity.Client;
+import fr.gourmetgo.entity.Gerant;
 import fr.gourmetgo.repository.AuthRepository;
 
 
@@ -21,6 +23,8 @@ public class ProjetGourmetgoApplication {
 CommandLineRunner init(AuthRepository authRepository) {
 return args -> {
 	authRepository.save(new Administrateur("ad", "min", "admin@gg.com", "admin123"));
+	authRepository.save(new Gerant("ge", "rant", "dede@gg.com", "dede123"));
+	authRepository.save(new Client("cl", "ient", "vincent@gg.com", "vincent123"));
 	};
 }
 
