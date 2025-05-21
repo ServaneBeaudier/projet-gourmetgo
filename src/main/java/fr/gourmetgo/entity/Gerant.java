@@ -15,6 +15,10 @@ public class Gerant extends Utilisateur{
     public Gerant(){
     }
 
+    public Gerant(String nom, String prenom, String email, String motDePasse) {
+        super(nom, prenom, email, motDePasse);
+    }
+
     public Restaurant getRestaurant() {
         return restaurant;
     }

@@ -5,8 +5,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import fr.gourmetgo.model.User;
-import fr.gourmetgo.repository.UserRepository;
+import fr.gourmetgo.entity.Administrateur;
+import fr.gourmetgo.repository.AuthRepository;
 
 @SpringBootApplication
 public class Application {
@@ -15,12 +15,11 @@ public class Application {
 		SpringApplication.run(Application.class, args);
 	}
 
-	@Bean
-	CommandLineRunner init(UserRepository userRepository) {
-	return args -> {
-		userRepository.save(new User(null, "admin", "admin123"));
-		userRepository.save(new User(null, "user", "pass"));
-		};
-	}
+@Bean
+CommandLineRunner init(AuthRepository authRepository) {
+return args -> {
+	authRepository.save(new Administrateur("ad", "min", "admin@gg.com", "admin123"));
+	};
+}
 
 }

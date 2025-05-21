@@ -65,4 +65,8 @@ public abstract class Utilisateur {
     }
 
     
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> origin/connexion
