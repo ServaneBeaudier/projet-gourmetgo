@@ -52,6 +52,11 @@
             margin-bottom: 10px;
             color: white;
         }
+
+        
+  
+</style>
+
     </style>
 </head>
 <body>
@@ -69,10 +74,51 @@
                 <!-- Champs à gauche -->
                 <div class="col-md-4">
                     <div class="encadre mb-3">
-                        <label for="typeResto" class="form-label">Type de restaurant :</label>
-                        <input type="text" id="typeResto" name="typeResto" class="form-control" th:field="*{typeResto}">
-                        <div class="text-danger" th:if="${#fields.hasErrors('nomResto')}" th:errors="*{nomResto}"></div> <!-- Affiche l'erreur -->
+  <label for="typeResto" class="form-label">Type de restaurant :</label>
+  <select id="typeResto" name="typeResto" class="form-control custom-select" th:field="*{typeResto}" onchange="toggleAutre(this)">
+     <option value="" disabled th:selected="${restaurant.typeResto == null or restaurant.typeResto == ''}">-- Choisissez un type --</option>
+     <option value="Italien">Vietnamien Haumont</option>
+     <option value="Français">Grec</option>
+     <option value="Mexicain">Libanais</option>
+     <option value="Chinois">Dessert</option>
+     <option value="Italien">Italien</option>
+     <option value="Français">Halal</option>
+     <option value="Mexicain">Thaï</option>
+     <option value="Chinois">Indien</option>
+     <option value="Italien">Mexicain</option>
+     <option value="Français">Japonais</option>
+     <option value="Mexicain">Chinois</option>
+     <option value="Chinois">Petit Déjeuner</option>
+     <option value="Italien">Végétarien</option>
+     <option value="Français">Sushi</option>
+     <option value="Mexicain">Américain</option>
+     <option value="Chinois">Pizza</option>
+     <option value="Autre">Autre</option>
+  </select>
+  <div class="text-danger" th:if="${#fields.hasErrors('typeResto')}" th:errors="*{typeResto}"></div>
+</div>
+
+
+
+
+
+                      <!-- Champ texte pour "Autre" qui est masqué par défaut -->
+                    <div id="autreDiv" class="encadre mb-3" style="display: none;">
+                      <label for="autreType" class="form-label">Précisez le type de restaurant :</label>
+                      <input type="text" id="autreType" name="autreType" class="form-control" />
                     </div>
+<script>
+    function toggleAutre(selectObj) {
+        var autreDiv = document.getElementById("autreDiv");
+        if (selectObj.value === "Autre") {
+            autreDiv.style.display = "block";
+        } else {
+            autreDiv.style.display = "none";
+        }
+    }
+</script>
+
+
 
                     <div class="encadre mb-3">
                         <label for="adresse" class="form-label">Adresse :</label>

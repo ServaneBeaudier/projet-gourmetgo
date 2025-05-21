@@ -23,9 +23,12 @@ public class RestaurantController {
 
     @GetMapping("/formulaire")
 public String afficherFormulaire(Model model) {
-    model.addAttribute("restaurant", new Restaurant()); // ✅ Crée un objet vide à chaque chargement
-    return "formulaire"; // Retourne la vue Thymeleaf
+    Restaurant r = new Restaurant(); // Déclaration de la variable 'r'
+    r.setTypeResto("");            // On s'assure que le champ type de restaurant est vide
+    model.addAttribute("restaurant", r);
+    return "formulaire";
 }
+
 
 
 
