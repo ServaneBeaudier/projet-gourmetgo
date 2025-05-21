@@ -48,17 +48,17 @@ body {
             margin: 20px;
             max-width: 300px;
         }
-.form-identifiant {
+.form-email {
             display: flex;
             align-items: center;
             margin-bottom: 15px;
         }
-.form-identifiant label {
+.form-email label {
             margin-right: 40px;
             margin-left: 100;
             width: 105px;
         }
-.form-identifiant input {
+.form-email input {
             flex: 1;
             background-color: #B8CBD0;
             border: 1px solid black;
