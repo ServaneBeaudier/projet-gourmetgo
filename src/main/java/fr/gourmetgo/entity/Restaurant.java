@@ -58,6 +58,7 @@ public class Restaurant {
     //@NotBlank(message = "Veuillez renseigner l'image.")
     private String imageResto;
 
+    //utile pour l'enregistrement d'image dans le formulaire de modif
     private String autreType;
     
     @OneToOne

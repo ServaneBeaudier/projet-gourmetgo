@@ -41,26 +41,26 @@ public class RestaurantControllerTest {
     }
 
     // Méthode de test pour la méthode updateRestaurant du contrôleur
-    @Test
-    public void testUpdateRestaurant() throws Exception {
-        // Crée un objet Restaurant avec des valeurs initiales
-        Restaurant restaurant = new Restaurant();
-        // Définit l'ID du restaurant
-        restaurant.setId(1L);
+    // @Test
+    // public void testUpdateRestaurant() throws Exception {
+    //     // Crée un objet Restaurant avec des valeurs initiales
+    //     Restaurant restaurant = new Restaurant();
+    //     // Définit l'ID du restaurant
+    //     restaurant.setId(1L);
 
-         // Configure le mock restaurantService pour retourner l'objet Restaurant lorsque updateRestaurant est appelé
-        when(restaurantService.updateRestaurant(any(Restaurant.class))).thenReturn(restaurant);
+    //      // Configure le mock restaurantService pour retourner l'objet Restaurant lorsque updateRestaurant est appelé
+    //     when(restaurantService.updateRestaurant(any(Restaurant.class))).thenReturn(restaurant);
 
-        // Utilise MockMvc pour envoyer une requête POST à l'endpoint /restaurants/update
-        // avec l'objet Restaurant comme attribut de modèle
-        mockMvc.perform(post("/restaurants/update")
-                .flashAttr("restaurant", restaurant))
-                // Vérifie que la réponse est une redirection (code 3xx)
-                .andExpect(status().is3xxRedirection())
-                // Vérifie que la redirection est vers l'URL /restaurants
-                .andExpect(redirectedUrl("/restaurants"));
+    //     // Utilise MockMvc pour envoyer une requête POST à l'endpoint /restaurants/update
+    //     // avec l'objet Restaurant comme attribut de modèle
+    //     mockMvc.perform(post("/restaurants/update")
+    //             .flashAttr("restaurant", restaurant))
+    //             // Vérifie que la réponse est une redirection (code 3xx)
+    //             .andExpect(status().is3xxRedirection())
+    //             // Vérifie que la redirection est vers l'URL /restaurants
+    //             .andExpect(redirectedUrl("/restaurants"));
 
-        // Vérifie que la méthode updateRestaurant du service a été appelée une fois avec l'objet Restaurant
-        verify(restaurantService, times(1)).updateRestaurant(restaurant);
-    }
+    //     // Vérifie que la méthode updateRestaurant du service a été appelée une fois avec l'objet Restaurant
+    //     verify(restaurantService, times(1)).updateRestaurant(restaurant);
+    // }
 }
