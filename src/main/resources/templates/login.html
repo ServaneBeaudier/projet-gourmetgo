@@ -19,19 +19,19 @@
           <h2></h2>
             <div class="col-md-6">
                 <div class="rectangle-membre">
-                    <p>Vous êtes déjà membre :</p>
-                    <form method="post" th:action="@{/login}">
-                        <div class="form-email">
-                            <label for="email">Email :</label>
-                            <input type="text" id="email" name="email" placeholder="Email" class="form-control"/>
-                        </div>
+                    <h5 class="card-title">Connexion</h5>
+                        <form method="post" th:action="@{/auth-login}">
+                            <div class="form-email">
+                                <label for="email">Email :</label>
+                                <input type="text" id="email" name="email" placeholder="Email" class="form-control" required/>
+                            </div>
                             <div class="row align-items-center">
                                 <div class="form-mdp col-auto">
                                     <label for="mdp">Mot de passe :</label>
-                                </div>
+                                     </div>
                                     <div class="col">
                                         <div class="bgd-mdp">
-                                            <input type="password" id="mdp" name="motDePasse" placeholder="Mot de passe" class="form-control"/>
+                                            <input type="password" id="mdp" name="motDePasse"  placeholder="Mot de passe" class="form-control" required/>
                                             <p th:if="${error}" th:text="${error}"></p>
                                         </div>
                                     </div>
@@ -50,23 +50,23 @@
         </div>        
     </div>
         <div class="container mt-5">
-        <div class="row">
-          <h2></h2>
-            <div class="col-md-6">
-                <div class="rectangle-client">
-                    <p>Pour créer un compte client</p>
-                    <form method="post" th:action="@{/login}">
-                        <div class="form-email">
-                            <label for="email">Email :</label>
-                            <input type="text" id="email" name="email" placeholder="Email" class="form-control"/>
-                        </div>
+            <div class="row">
+                <h2></h2>
+                <div class="col-md-6">
+                    <div class="rectangle-client">
+                        <p>Créer un compte client</p>
+                            <form method="post" th:action="@{/client-login}">
+                                <div class="form-email">
+                                    <label for="clientEmail">Email :</label>
+                                    <input type="text" id="clientEmail" name="clientEmail" placeholder="Email" class="form-control" required/>
+                                </div>
                             <div class="row align-items-center">
                                 <div class="form-mdp col-auto">
                                     <label for="mdp">Mot de passe :</label>
-                                </div>
+                                    </div>
                                     <div class="col">
                                         <div class="bgd-mdp">
-                                            <input type="password" id="mdp" name="motDePasse" placeholder="Mot de passe" class="form-control"/>
+                                            <input type="password" id="mdp" name="clientMotDePasse" placeholder="Mot de passe" class="form-control" required/>
                                             <p th:if="${error}" th:text="${error}"></p>
                                         </div>
                                     </div>
@@ -76,38 +76,38 @@
                                 <button class="btn nav-button-client" type="submit" text-center>Créer le compte</button>
                             </div>
                     </form>       
+                    </div>
                 </div>
-
-            </div>
+            
                 <div class="col-md-6">
-                <div class="rectangle-restaurant">
-                    <p>Pour créer un compte restaurant :</p>
-                    <form method="post" th:action="@{/login}">
+                    <div class="rectangle-gerant">
+                        <p>Pour créer un compte restaurant :</p>
+                        <form method="post" th:action="@{/gerant-login}">
                         <div class="form-email">
-                            <label for="email">Email :</label>
-                            <input type="text" id="email" name="email" placeholder="Email" class="form-control"/>
+                            <label for="gerantEmail">Email :</label>
+                            <input type="text" id="gerantEmail" name="gerantEmail" placeholder="Email" class="form-control"/>
                         </div>
-                            <div class="row align-items-center">
-                                <div class="form-mdp col-auto">
-                                    <label for="mdp">Mot de passe :</label>
-                                </div>
+                                <div class="row align-items-center">
+                                    <div class="form-mdp col-auto">
+                                        <label for="mdp">Mot de passe</label>
+                                    </div>
                                     <div class="col">
                                         <div class="bgd-mdp">
-                                            <input type="password" id="mdp" name="motDePasse" placeholder="Mot de passe" class="form-control"/>
+                                            <input type="password" id="gerantMotDePasse" name="gerantMotDePasse" placeholder="Mot de passe" class="form-control" required/>
                                             <p th:if="${error}" th:text="${error}"></p>
                                         </div>
                                     </div>
                             </div>
                             <br>
                             <div class="d-flex justify-content-center">
-                                <button class="btn nav-button-restaurant" type="submit" text-center>Créer le compte</button>
+                                <button class="btn nav-button-gerant" type="submit" text-center>Envoyer</button>
                             </div>
-                    </form>       
-                </div>
-
+                        </form>
+                    </div>
+                </div> 
             </div>
-        </div>        
-    </div>
+        </div>     
+    
         <!-- Footer avec copyright -->
         <footer class="text-center mt-5 mb-3">
             &copy; 2025 - GourmetGo

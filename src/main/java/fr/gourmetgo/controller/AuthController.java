@@ -14,37 +14,33 @@ public class AuthController {
     @Autowired
     private AuthService authService;
 
-    @GetMapping("/")
-    public String home() {
-    return "home";
-    }
-
     @GetMapping("/login")
-    public String loginForm() {
-    return "login";
+    public String showLoginForm() {
+        return "login";
     }
 
-    @PostMapping("/login")
+    @PostMapping("/auth-login")
     public String login(@RequestParam String email, @RequestParam String motDePasse, HttpSession session, Model model) {
         if (authService.authenticate(email, motDePasse)) {
-        session.setAttribute("user", authService.findUser(email));
-        return "redirect:/dashboard";
-    } else {
-        model.addAttribute("error", "Identifiants invalides !");
-        return "login";
+            session.setAttribute("user", authService.findUser(email));
+            return "redirect:/dashboard";
+        } else {
+            model.addAttribute("error", "Identifiants invalides !");
+            return "login";
         }
     }
+
     @GetMapping("/dashboard")
     public String dashboard(HttpSession session) {
         if (session.getAttribute("user") == null) {
-        return "redirect:/login";
+            return "redirect:/login";
         }
         return "dashboard";
-        }
-        
+    }
+
     @GetMapping("/logout")
     public String logout(HttpSession session) {
-    session.invalidate();
-    return "redirect:/login";
+        session.invalidate();
+        return "redirect:/login";
     }
 }

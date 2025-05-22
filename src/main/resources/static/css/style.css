@@ -168,7 +168,7 @@ button {
     height: 250px;
 }
 
-.rectangle-restaurant {
+.rectangle-gerant {
     border: 2px solid black;
     border-radius: 15px;
     padding: 8px 20px;
@@ -247,7 +247,7 @@ button {
     background-color: #344D59;
 }
 
-.nav-button-restaurant {
+.nav-button-gerant {
         border: 2px solid black;
         border-radius: 15px;
         padding: 8px 20px;
@@ -259,6 +259,6 @@ button {
         align-items: center;
     }
 
-.nav-button-restaurant:hover {
+.nav-button-gerant:hover {
     background-color: #709CA7;
 }
