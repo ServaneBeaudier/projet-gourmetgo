@@ -37,11 +37,6 @@ public class RestaurantController {
         return "accueilGR"; 
     }
 
-    // @GetMapping("/dashboard")
-    // public String connexionOK() {
-    //     return "dashboard"; 
-    // }
-
     @GetMapping("/restaurants/formulaire")
     public String afficherFormulaire(Model model) {
     Restaurant restaurant = new Restaurant(); // Déclaration de la variable 'r'
