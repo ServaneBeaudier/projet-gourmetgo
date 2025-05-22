@@ -63,5 +63,13 @@ public class RestaurantService {
     );
     return existing.isPresent();    
     }
+
+    public void supprimerRestaurant(Long id){
+        if (restaurantRepo.existsById(id)) {
+            restaurantRepo.deleteById(id);
+        } else {
+        throw new EntityNotFoundException("Restaurant introuvable");
+        }
+    }
 }
 

@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -107,12 +108,19 @@ public class RestaurantController {
         return "liste_restaurant";
     }
 
+
+
     @GetMapping("/list/{id}")
     public String showFicheRestaurant(@PathVariable Long id, Model model) {
         Restaurant restaurant = restaurantService.getRestaurantById(id);
+        if (restaurant == null) {
+        return "redirect:/admin/list";
+    }
         model.addAttribute("restaurant", restaurant);
         return "fiche_restaurant";
     }
+
+
 
     @GetMapping("/restaurants/edit/{id}")
     public String showEditForm(@PathVariable("id") Long id, Model model) {
@@ -120,6 +128,8 @@ public class RestaurantController {
         model.addAttribute("restaurant", restaurant);
         return "edit_restaurant";
     }
+
+
 
     @PostMapping("/restaurants/update")
     public String updateRestaurant(
@@ -156,8 +166,15 @@ public class RestaurantController {
     restaurantService.updateRestaurant(restaurant);
 
     return "redirect:/admin/list/" + restaurant.getId();
-}
+    }
 
+
+    @PostMapping("/restaurants/supprimer/{id}")
+    public String supprimerRestaurant(@PathVariable Long id, RedirectAttributes redirectAttributes){
+        restaurantService.supprimerRestaurant(id);
+        redirectAttributes.addFlashAttribute("message", "Le restaurant a bien été supprimé");
+        return "redirect:/admin/list";
+    }
 
 
 
