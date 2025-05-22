@@ -150,7 +150,7 @@
           <div class="form-encadre">
             <label for="telResto" class="form-label">Téléphone :</label>
             <input type="text" id="telResto" name="telResto" class="form-control"
-                   th:field="*{telResto}" readonly placeholder="ex : 0123456789">
+                   th:field="*{telResto}" placeholder="ex : 0123456789">
             <div class="text-danger" th:if="${#fields.hasErrors('telResto')}" th:errors="*{telResto}"></div>
           </div>
 
@@ -204,7 +204,7 @@
       document.getElementById("ville").value = "";
     }, 0);
   });
-</script>
+           </script>
 
         </div>
       </div>
