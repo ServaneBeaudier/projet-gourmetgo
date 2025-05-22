@@ -1,7 +1,8 @@
-package fr.gourmetgo.entity;
+/* package fr.gourmetgo.entity;
 
 
 public class UtilisateurTest {
 
     // à revoir car classe abstraite
 }
+ */

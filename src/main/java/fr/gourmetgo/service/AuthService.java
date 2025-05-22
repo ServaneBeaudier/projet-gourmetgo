@@ -10,9 +10,18 @@ public class AuthService {
 
     @Autowired
     private AuthRepository authRepository;
+
+    @Autowired
+    private PasswordService passwordService;
+
     public boolean authenticate(String email, String motDePasse) {
-    return authRepository.findByEmail(email).map(user -> user.getMotDePasse().equals(motDePasse)).orElse(false);
+        Utilisateur user = authRepository.findByEmail(email).orElse(null);
+        if (user != null) {
+            return passwordService.checkPassword(motDePasse, user.getMotDePasse());
+        }
+        return false;
     }
+    
     public Utilisateur findUser(String email) {
     return authRepository.findByEmail(email).orElse(null);
     }

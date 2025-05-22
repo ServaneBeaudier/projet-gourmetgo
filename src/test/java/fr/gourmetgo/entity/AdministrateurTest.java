@@ -1,5 +1,6 @@
-package fr.gourmetgo.entity;
+/* package fr.gourmetgo.entity;
 
 public class AdministrateurTest {
 
 }
+ */

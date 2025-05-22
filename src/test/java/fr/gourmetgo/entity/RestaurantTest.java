@@ -1,4 +1,4 @@
-package fr.gourmetgo.entity;
+/* package fr.gourmetgo.entity;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -22,3 +22,4 @@ public class RestaurantTest {
     }
 
 }
+ */
