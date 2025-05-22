@@ -9,56 +9,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
   <link rel="icon" th:href="@{/images/favicon.ico}" type="image/x-icon">
-  <style>
-    body {
-      background-color: #B8CBD0;
-    }
-    .container {
-      width: 90%;
-      max-width: none;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0);
-    }
-    label {
-      color: #000000;
-    }
-    .btn-custom {
-      background-color: #7A90A4;
-      border-color: #7A90A4;
-      color: white;
-      width: 50%;
-    }
-    .form-control {
-      background-color: #FFFFFF;
-      border: 1px solid #709CA7;
-    }
-    .encadre {
-      background-color: #709CA7;
-      padding: 15px;
-      border-radius: 10px;
-      margin-bottom: 15px;
-    }
-    .image-placeholder {
-      background-color: #709CA7;
-      width: 450px;
-      height: 450px;
-      border-radius: 10px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-    .image-placeholder input {
-      width: 80%;
-      text-align: center;
-    }
-    .image-placeholder label {
-      font-weight: bold;
-      margin-bottom: 10px;
-      color: white;
-    }
-  </style>
 </head>
 <body class="d-flex flex-column min-vh-100">
 
@@ -129,11 +79,11 @@
         <!-- Colonne gauche : informations générales et adresse -->
         <div class="col-md-4">
           <!-- Type de restaurant -->
-          <div class="encadre">
+          <div class="form-encadre">
             <label for="typeResto" class="form-label">Type de restaurant :</label>
             <select id="typeResto" name="typeResto" class="form-control custom-select"
                     th:field="*{typeResto}" onchange="toggleAutre(this)">
-              <option value="" disabled th:selected="${restaurant.typeResto == null or restaurant.typeResto == ''}">
+              <option value="" th:selected="${restaurant.typeResto == null or restaurant.typeResto == ''}">
                 -- Choisissez un type --
               </option>
               <option value="Vietnamien">Vietnamien Spécialité Haumont</option>
@@ -158,7 +108,7 @@
           </div>
           
           <!-- Champ "Autre" -->
-          <div id="autreDiv" class="encadre" style="display: none;">
+          <div id="autreDiv" class="form-encadre" style="display: none;">
             <label for="autreType" class="form-label">Précisez le type de restaurant :</label>
             <input type="text" id="autreType" name="autreType" class="form-control" />
           </div>
@@ -174,7 +124,7 @@
           </script>
 
           <!-- Adresse : Numéro, Rue, Code postal, Ville -->
-          <div class="encadre">
+          <div class="form-encadre">
             <label for="numRue" class="form-label">Numéro de rue :</label>
             <input type="text" id="numRue" name="numRue" class="form-control"
                    th:field="*{numRue}" placeholder="ex : 123">
@@ -197,15 +147,15 @@
           </div>
           
           <!-- Téléphone -->
-          <div class="encadre">
+          <div class="form-encadre">
             <label for="telResto" class="form-label">Téléphone :</label>
             <input type="text" id="telResto" name="telResto" class="form-control"
-                   th:field="*{telResto}">
+                   th:field="*{telResto}" readonly placeholder="ex : 0123456789">
             <div class="text-danger" th:if="${#fields.hasErrors('telResto')}" th:errors="*{telResto}"></div>
           </div>
 
           <!-- Horaire : Heures d'ouverture et de fermeture -->
-          <div class="encadre">
+          <div class="form-encadre">
             <label for="heureOuverture" class="form-label">Heure d'ouverture :</label>
             <input type="time" id="heureOuverture" name="heureOuverture" class="form-control"
                    th:field="*{heureOuverture}">
@@ -220,7 +170,7 @@
         
         <!-- Colonne centrale : Image -->
         <div class="col-md-4 d-flex justify-content-center">
-          <div class="image-placeholder">
+          <div class="form-image-placeholder">
             <label for="imageResto" class="form-label text-white">Ajouter une image :</label>
             <input type="file" id="imageResto" name="imageFile" class="form-control" accept="image/*">
             <div class="text-danger" th:if="${#fields.hasErrors('imageResto')}" th:errors="*{imageResto}"></div>
@@ -232,8 +182,30 @@
         
         <!-- Colonne droite : Boutons -->
         <div class="col-md-4 d-flex flex-column align-items-center">
-          <button type="submit" class="btn btn-custom mb-2">Valider</button>
-          <a href="/restaurants/formulaire" class="btn btn-custom">Réinitialiser</a>
+          <button type="submit" class="form-btn-custom mb-2">Valider</button>
+          <button type="reset" class="form-btn-custom mb-2" id="form-resetBtn">Réinitialiser</button>
+
+          <script>
+           // On sélectionne le bouton de réinitialisation grâce à son id "resetBtn"
+              document.getElementById("form-resetBtn").addEventListener("click", function() {
+           // On utilise setTimeout avec un délai de 0 millisecondes pour attendre que le reset ait été appliqué
+              setTimeout(function(){
+           // Sélectionner tous les éléments qui affichent les messages d'erreur (on suppose qu'ils ont la classe 'text-danger')
+              let errorElements = document.querySelectorAll('.text-danger');
+             errorElements.forEach(function(el) {
+           // On vide le contenu de ces éléments
+             el.innerHTML = "";
+      });
+      
+      // forcer la réinitialisation de certains champs qui pourraient être affectés par d'autres scripts,
+      // si besoin d'autres,les mentionner ici:
+      document.getElementById("nomRue").value = "";
+      document.getElementById("codePostal").value = "";
+      document.getElementById("ville").value = "";
+    }, 0);
+  });
+</script>
+
         </div>
       </div>
     </form>

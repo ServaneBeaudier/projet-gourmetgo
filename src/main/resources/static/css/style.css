@@ -112,38 +112,70 @@ body {
     background-color: #f4f4f4;
 }
 
-/* Reprise fichier Adam */
-/* h1 {
-    color: #333;
-}
 
-form {
-    background: white;
-    padding: 20px;
-    max-width: 400px;
-    margin: auto;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-}
+/* CSS Adam 
 
-label {
-    display: block;
-    margin-top: 10px;
-}
+placeholder = carré central (imageResto)
+control = champs
+encadre = encadre des champs
 
-input {
-    width: 100%;
-    padding: 8px;
-    margin-top: 5px;
+*/
+body {
+      background-color: #B8CBD0;
+    }
+    form.container {
+      width: 90%;
+      max-width: none;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.0);
+    }
+    label {
+      color: #000000;
+    }
+    .form-btn-custom {
+      background-color: #7A90A4;
+      border-color: #7A90A4;
+      color: white;
+      width: 50%;
+    }
+    .form-control {
+      background-color: #FFFFFF;
+      border: 1px solid #ffffff;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    .form-encadre {
+      background-color: #709CA7;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    .form-image-placeholder {
+      background-color: #709CA7;
+      width: 450px;
+      height: 450px;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    .form-image-placeholder input {
+      width: 80%;
+      text-align: center;   
+    }
+    .form-image-placeholder label {
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: white;
+    }
+    /*parametre les exemples des champs */
+    ::placeholder {
+    color: #d4d3d3;     
+    font-style: italic;
 }
-
-button {
-    margin-top: 15px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-} */
 
 /* CSS Vincent */
 .rectangle-membre {
