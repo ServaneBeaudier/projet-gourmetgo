@@ -17,7 +17,7 @@
     <div class="container mt-5">
         <div class="row">
           <h2></h2>
-            <div class="col-md-6">
+            <div class="col-md-6 mb-2">
                 <div class="rectangle-membre">
                     <h5 class="card-title">Connexion</h5>
                         <form method="post" th:action="@{/auth-login}">
@@ -35,24 +35,24 @@
                                             <p th:if="${error}" th:text="${error}"></p>
                                         </div>
                                     </div>
-                            </div>
-                            <br>
-                            <div class="d-flex justify-content-center">
+                            </div>                            <div class="d-flex justify-content-center">
                                 <button class="btn nav-button-membre" type="submit" text-center>Se connecter</button>
                             </div>
                     </form>       
                 </div>
 
             </div>
-                <div class="col-md-6">
-                    <img src="images/logo.png" alt="Description de l'image" class="img-fluid">
+                <div class="col-md-6 justify-content-center" >
+                    <div class="logo">
+                        <img src="images/logo.png" alt="Description de l'image" class="img-fluid d-none d-md-block">
+                    </div>
                 </div>
         </div>        
     </div>
-        <div class="container mt-5">
+        <div class="container mt-2">
             <div class="row">
                 <h2></h2>
-                <div class="col-md-6">
+                <div class="col-md-6 mb-4">
                     <div class="rectangle-client">
                         <p>Créer un compte client</p>
                             <form method="post" th:action="@{/client-login}">
@@ -71,7 +71,6 @@
                                         </div>
                                     </div>
                             </div>
-                            <br>
                             <div class="d-flex justify-content-center">
                                 <button class="btn nav-button-client" type="submit" text-center>Créer le compte</button>
                             </div>
@@ -79,9 +78,9 @@
                     </div>
                 </div>
             
-                <div class="col-md-6">
+                <div class="col-md-6 mb-4">
                     <div class="rectangle-gerant">
-                        <p>Pour créer un compte restaurant :</p>
+                        <p>Pour créer un compte gérant :</p>
                         <form method="post" th:action="@{/gerant-login}">
                         <div class="form-email">
                             <label for="gerantEmail">Email :</label>
@@ -98,9 +97,8 @@
                                         </div>
                                     </div>
                             </div>
-                            <br>
                             <div class="d-flex justify-content-center">
-                                <button class="btn nav-button-gerant" type="submit" text-center>Envoyer</button>
+                                <button class="btn nav-button-gerant" type="submit" text-center>Créer le compte</button>
                             </div>
                         </form>
                     </div>

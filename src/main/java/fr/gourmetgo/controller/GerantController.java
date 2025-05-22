@@ -22,6 +22,6 @@ public class GerantController {
         gerant.setNom(""); // Définissez une valeur par défaut ou récupérez-la depuis le formulaire
         gerant.setPrenom(""); // Définissez une valeur par défaut ou récupérez-la depuis le formulaire
         gerantRepository.save(gerant); // Sauvegarde le client dans la base de données
-        return "redirect:/dashboard";
+        return "redirect:/login";
     }
 }

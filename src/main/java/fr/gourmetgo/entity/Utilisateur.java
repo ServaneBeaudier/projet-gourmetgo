@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
+import jakarta.persistence.Column;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -21,6 +22,8 @@ public abstract class Utilisateur {
     private String prenom;
     private String email;
     private String motDePasse;
+
+   
 
 
     public Utilisateur() {
@@ -62,6 +65,20 @@ public abstract class Utilisateur {
     }
     public void setMotDePasse(String motDePasse) {
         this.motDePasse = motDePasse;
+    }
+
+     // Méthode pour obtenir le type d'utilisateur
+    public String getTypeUtilisateur() {
+        // Utilisez l'annotation @DiscriminatorValue pour obtenir le type d'utilisateur
+        if (this instanceof Administrateur) {
+            return "ADMIN";
+        } else if (this instanceof Gerant) {
+            return "GERANT";
+        } else if (this instanceof Client) {
+            return "CLIENT";
+        } else {
+            throw new IllegalArgumentException("Unknown user type");
+        }
     }
 
 }

@@ -22,6 +22,6 @@ public class ClientController {
         client.setNom(""); // Définissez une valeur par défaut ou récupérez-la depuis le formulaire
         client.setPrenom(""); // Définissez une valeur par défaut ou récupérez-la depuis le formulaire
         clientRepository.save(client); // Sauvegarde le client dans la base de données
-        return "redirect:/dashboard";
+        return "redirect:/login";
     }
 }
