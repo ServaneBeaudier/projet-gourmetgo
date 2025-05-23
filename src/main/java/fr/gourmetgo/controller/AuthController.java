@@ -82,14 +82,14 @@ public class AuthController {
      * @param session La session HTTP pour vérifier si l'utilisateur est connecté.
      * @return Le nom de la vue du tableau de bord de l'administrateur ou une redirection vers le formulaire de connexion.
      */
-    @GetMapping("/admin-dashboard")
+/*     @GetMapping("/dashboard")
     public String adminDashboard(HttpSession session) {
         if (session.getAttribute("user") == null) {
             return "redirect:/login";
         }
-        return "admin-dashboard";
+        return "dashboard";
     }
-
+ */
     /**
      * Affiche le tableau de bord du gérant.
      *
