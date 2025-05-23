@@ -67,7 +67,11 @@
                     <p><strong>ID :</strong> <span th:text="${restaurant.id}">1</span></p>
                 </div>
                 <div class="info-bloc">
-                    <p><strong>Type :</strong> <span th:text="${restaurant.typeResto}">Italien</span></p>
+                    <p><strong>Type :</strong>
+                        <span th:text="${restaurant.typeResto == 'autre' or restaurant.typeResto == 'Autre'} ? ${restaurant.autreType} : ${restaurant.typeResto}">
+                        Italien
+                        </span>
+                    </p>
                 </div>
                 <div class="info-bloc">
                     <p><strong>Adresse :</strong><br>

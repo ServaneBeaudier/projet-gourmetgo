@@ -84,7 +84,12 @@
                         <span th:text="${resto.numRue} + ' ' + ${resto.nomRue} + ', ' + ${resto.codePostal} + ' ' + ${resto.ville}"></span>
                     </td>
                     <td th:text="${resto.telResto}"></td>
-                    <td th:text="${resto.typeResto}"></td>
+                    <td>
+                        <span th:if="${resto != null and (resto.typeResto == 'autre' or resto.typeResto == 'Autre')}"
+                        th:text="${resto.autreType}"></span>
+                        <span th:if="${resto != null and resto.typeResto != 'autre' and resto.typeResto != 'Autre'}"
+                        th:text="${resto.typeResto}"></span>
+                    </td>
                 </tr>
             </tbody>
         </table>
