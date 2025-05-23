@@ -2,8 +2,7 @@ body {
     font-family: "Lexend", sans-serif;
     font-optical-sizing: auto;
     background-color: #B8CBD0;
-    padding-top: 144px;
-
+    font-size: 0.9rem;
 }
 
 .navbar-custom {
@@ -203,7 +202,7 @@ button {
         }
 .form-email label {
             margin-right: 40px;
-/*              margin-left: 100px; /* Adjust margin for responsiveness */ */
+/*              margin-left: 100px; /* Adjust margin for responsiveness */
             width: 105px;
         }
 .form-email input {
@@ -218,7 +217,7 @@ button {
 }
 .form-mdp label {
             margin-top : 10px;
-            /* margin-left: 100px; /* Adjust margin for responsiveness */ */
+            /* margin-left: 100px; /* Adjust margin for responsiveness */
             width: 120px;
 }
 
@@ -279,4 +278,9 @@ button {
     align-items: center;
     margin-top: -50px; /* Ajustez cette valeur pour remonter l'image */
     margin-left: -100px; /* Ajustez cette valeur pour remonter l'image */
+}
+
+.title {
+    text-align: center;
+    margin-top: 20px; /* Assurez-vous qu'il n'y a pas de marge supplémentaire en haut */
 }
