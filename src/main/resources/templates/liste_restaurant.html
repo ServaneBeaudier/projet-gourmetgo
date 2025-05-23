@@ -15,33 +15,34 @@
 
     <main class="flex-grow-1">
 
-    <!-- Titre centré -->
-    <div class="titrepage text-center py-1 fixed-top">
-        <h3>Tableau de bord</h3>
-    </div>
-
     <!-- NAVBAR -->
     <!-- à placer en dehors du container pour prendre toute la page -->
-    <nav class="navbar navbar-expand-md navbar-custom py-1 fixed-top" style="top: 48px">
-        <div class="container-fluid justify-content-between">
+    <nav class="navbar navbar-expand-md navbar-custom flex-column p-0">
+    <!-- Ligne 1 : Titre + bouton burger -->
+    <div class="w-100 d-flex align-items-center justify-content-between px-3 py-0">
+        <div class="flex-grow-1 text-center">
+            <a href="/dashboard" class="btn btn-central btn-sm mx-auto">Tableau de bord</a>
+        </div>
 
-            <!-- Bouton burger -->
-            <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarButtons"
-            aria-controls="navbarButtons" aria-expanded="false" aria-label="Toggle navigation">
+        <!-- Burger menu à droite -->
+        <button class="navbar-toggler ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarButtons"
+                aria-controls="navbarButtons" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
-            </button>
+        </button>
+    </div>
 
-            <!-- Contenu à cacher/afficher -->
-            <div class="collapse navbar-collapse justify-content-center" id="navbarButtons">
-                <div class="d-flex flex-column flex-md-row gap-2 mt-3 mt-md-0">
-                    <a href="/admin/restaurants" class="btn nav-button">Gestion restaurants</a>
-                    <a href="/admin/clients" class="btn nav-button">Gestion clients</a>
-                    <a href="/admin/commandes" class="btn nav-button">Gestion commandes</a>
-                    <a href="/admin/statistiques" class="btn nav-button">Statistiques</a>
-                    <a href="/logout" class="btn btn-deconnexion">Déconnexion</a>
-                </div>
+    <!-- Ligne 2 : Liens de navigation (collapsables) -->
+    <div class="container-fluid w-100 justify-content-center px-3">
+        <div class="collapse navbar-collapse justify-content-center" id="navbarButtons">
+            <div class="d-flex flex-column flex-md-row gap-2 py-1">
+                <a href="/admin/restaurants" class="btn nav-button">Gestion restaurants</a>
+                <a href="/admin/clients" class="btn nav-button">Gestion clients</a>
+                <a href="/admin/commandes" class="btn nav-button">Gestion commandes</a>
+                <a href="/admin/statistiques" class="btn nav-button">Statistiques</a>
+                <a href="/logout" class="btn btn-deconnexion">Déconnexion</a>
             </div>
         </div>
+    </div>
     </nav>
 
     <!-- DEUXIEME NAV BAR -->
