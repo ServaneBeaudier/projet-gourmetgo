@@ -28,7 +28,7 @@ public class Restaurant {
     @NotBlank(message = "Veuillez renseigner le nom du restaurant")
     private String nomResto;
 
-    @NotBlank(message = "Veuillez renseigner le numéro")
+    @NotBlank(message = "Veuillez renseigner le numéro de rue")
     private String numRue;
     
     @NotBlank(message = "Veuillez renseigner la rue")

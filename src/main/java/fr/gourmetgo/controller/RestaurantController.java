@@ -41,65 +41,119 @@ public class RestaurantController {
     //     return "dashboard"; 
     // }
 
+// ------------------ Partie Adam inscription Restaurant (formulaire) ------------------
+
+    /**
+     * Affiche le formulaire d'inscription d'un restaurant.
+     * <p>
+     * Cette méthode gère la requête GET pour afficher le formulaire d'inscription.
+     * Elle crée une nouvelle instance de {@code Restaurant} et réinitialise le type de restaurant à une chaîne vide
+       (afin d'afficher le placeholder dans le menu déroulant, et ajouter l'objet au modèle.)
+     * </p>
+     *
+     * @param model le modèle dans lequel l'instance du restaurant est ajoutée afin d'être liée au formulaire
+     * @return le nom de la vue Thymeleaf correspondant au formulaire ("formulaire")
+     */
     @GetMapping("/restaurants/formulaire")
     public String afficherFormulaire(Model model) {
-    Restaurant restaurant = new Restaurant(); // Déclaration de la variable 'r'
-    restaurant.setTypeResto("");    // On s'assure que le champ type de restaurant est vide
-    model.addAttribute("restaurant", restaurant);
-    return "formulaire";
+        Restaurant restaurant = new Restaurant(); // Création d'une nouvelle instance de Restaurant
+        restaurant.setTypeResto("");                // Initialisation du type de restaurant à vide
+        model.addAttribute("restaurant", restaurant);
+        return "formulaire";
     }
 
 
-   @PostMapping("/formulaire")
-    public String inscrireRestaurant(@Valid @ModelAttribute("restaurant") Restaurant restaurant,
-                                 BindingResult result,
-                                 @RequestParam("imageFile") MultipartFile imageFile,
-                                 Model model) {
+    /**
+     * Traite la soumission du formulaire d'inscription d'un restaurant.
+     * <p>
+     * Cette méthode gère la requête POST envoyée depuis le formulaire. Elle effectue plusieurs traitements :
+     
+    *     Gestion de l'image : vérifie si un fichier a été envoyé. Si c'est le cas, l'image est uploadée dans le dossier "uploads"
+    *     et le chemin du fichier est stocké dans l'objet {@code Restaurant}. En cas d'erreur lors de l'upload, la méthode ajoute 
+    *     un message d'erreur au modèle et réaffiche le formulaire.
 
-    // 1. Gestion de l'image d'abord
-    if (!imageFile.isEmpty()) {
-        try {
-            String fileName = UUID.randomUUID() + "_" + imageFile.getOriginalFilename();
-            Path uploadDir = Paths.get("uploads");
-            if (!Files.exists(uploadDir)) {
-                Files.createDirectories(uploadDir);
+    *     Validation globale (champs) : après la gestion de l'image, l'objet {@code Restaurant} est validé automatiquement grâce à l'annotation {@code @Valid}
+    *     et aux contraintes définies dans la classe. Si des erreurs sont présentes, le formulaire est réaffiché.
+    
+    *     Vérification d'existence : la méthode vérifie ensuite si un restaurant similaire existe déjà. Si c'est le cas, une erreur est ajoutée et
+    *     le formulaire est réaffiché.
+    
+    *     Sauvegarde : si aucune erreur n'est détectée, le restaurant est sauvegardé et la méthode redirige vers la page succès en passant l'identifiant
+    *     du nouveau restaurant en paramètre.
+
+    * </p>
+    *
+    * @param restaurant L'objet {@code Restaurant} rempli avec les données du formulaire.
+    * @param result Le résultat de la validation qui peut contenir des erreurs si certaines contraintes ne sont pas respectées.
+    * @param imageFile Le fichier image envoyé avec le formulaire. Il est utilisé pour effectuer l'opération d'upload.
+    * @param model Le modèle qui permet de renvoyer des messages d'erreur vers la vue en cas de problème.
+    * @return Si une erreur est détectée, retourne "formulaire" pour réafficher le formulaire.
+    *         Sinon, redirige vers "/admin/success" avec l'ID du restaurant nouvellement enregistré.
+    */
+    @PostMapping("/formulaire")
+    public String inscrireRestaurant(@Valid @ModelAttribute("restaurant") Restaurant restaurant,
+                                    BindingResult result,
+                                    @RequestParam("imageFile") MultipartFile imageFile,
+                                    Model model) {
+        // Gestion de l'image
+        if (!imageFile.isEmpty()) {
+            try {
+                String fileName = UUID.randomUUID() + "_" + imageFile.getOriginalFilename();
+                Path uploadDir = Paths.get("uploads");
+                if (!Files.exists(uploadDir)) {
+                    Files.createDirectories(uploadDir);
+                }
+                Path filePath = uploadDir.resolve(fileName);
+                Files.copy(imageFile.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+                restaurant.setImageResto("/uploads/" + fileName);
+            } catch (IOException e) {
+                e.printStackTrace();
+                model.addAttribute("uploadError", "Erreur lors de l'envoi de l'image.");
+                return "formulaire";
             }
-            Path filePath = uploadDir.resolve(fileName);
-            Files.copy(imageFile.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
-            restaurant.setImageResto("/uploads/" + fileName); // Affecte ici AVANT la validation
-        } catch (IOException e) {
-            e.printStackTrace();
-            model.addAttribute("uploadError", "Erreur lors de l'envoi de l'image.");
+        } else {
+            result.rejectValue("imageResto", "imageFile.empty", "Veuillez ajouter une image.");
+        }
+
+        // Validation des autres champs via Bean Validation
+        if (result.hasErrors()) {
             return "formulaire";
         }
-    } else {
-        result.rejectValue("imageResto", "imageFile.empty", "Veuillez ajouter une image.");
+
+        // Vérification de l'existence d'un restaurant similaire
+        if (restaurantService.restaurantExists(restaurant)) {
+            result.reject("duplicate", "Ce restaurant existe déjà.");
+            return "formulaire";
+        }
+
+        // Sauvegarde du restaurant et redirection vers la page succès
+        Restaurant nouveauRestaurant = restaurantService.enregistrerRestaurant(restaurant);
+        return "redirect:/admin/success?restaurantId=" + nouveauRestaurant.getId();
     }
 
-    // 2. Ensuite seulement on valide
-    if (result.hasErrors()) {
-        return "formulaire";
-    }
+// ------------------ Partie affichage de la page succès ------------------
 
-    // 3. Vérifie si le restaurant existe déjà
-    if (restaurantService.restaurantExists(restaurant)) {
-        result.reject("duplicate", "Ce restaurant existe déjà.");
-        return "formulaire";
-    }
-
-    // 4. Sauvegarde
-    Restaurant nouveauRestaurant = restaurantService.enregistrerRestaurant(restaurant);
-    return "redirect:/admin/success?restaurantId=" + nouveauRestaurant.getId();
-    }
-
-
-
+    /** n                 
+     * Affiche la page succès après l'inscription du restaurant.
+     * <p>
+     * Cette méthode gère la requête GET vers la page de succès,
+     * récupérant l'ID du restaurant à partir du paramètre de requête et ajoutant l'objet Restaurant correspondant au modèle 
+     * pour affichage dans la vue.
+     * </p>
+     *
+     * @param restaurantId l'identifiant du restaurant qui vient d'être inscrit
+     * @param model le modèle dans lequel l'objet Restaurant est placé pour être affiché dans la vue
+     * @return le nom de la vue Thymeleaf correspondant à la page succès ("success")
+     */
     @GetMapping("/success")
-    public String afficherSuccess() {
-        return "success"; // Affiche la vue success.html
-
+    public String afficherSuccess(@RequestParam("restaurantId") Long restaurantId, Model model) {
+        Restaurant restaurant = restaurantService.getRestaurantById(restaurantId);
+        model.addAttribute("restaurant", restaurant);
+        return "success";
     }
 
+
+    
     @GetMapping("/list")
     public String listRestaurants(Model model) {
         List<Restaurant> restaurants = restaurantService.getAllRestaurants();

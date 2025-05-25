@@ -12,7 +12,13 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {
         String ville,
         String nomRue,
         String numRue);
+
+        
 }
+
+
+
+
 
 
 
