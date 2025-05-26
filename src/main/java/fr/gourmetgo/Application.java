@@ -28,15 +28,6 @@ public class Application {
         SpringApplication.run(Application.class, args);
     }
 
-<<<<<<< HEAD
-@Bean
-CommandLineRunner init(AuthRepository authRepository) {
-return args -> {
-	// authRepository.save(new Administrateur("ad", "min", "admin@gg.com", "admin123"));
-	// authRepository.save(new Gerant("ge", "rant", "dede@gg.com", "dede123"));
-	// authRepository.save(new Client("cl", "ient", "vincent@gg.com", "vincent123"));
-	};
-=======
     /**
      * Initialise des utilisateurs par défaut dans la base de données lors du démarrage de l'application.
      *
@@ -66,5 +57,4 @@ return args -> {
             System.out.println("Users initialized.");
         };
     }
->>>>>>> origin/connexion2
 }
