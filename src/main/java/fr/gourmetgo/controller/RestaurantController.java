@@ -41,8 +41,12 @@ public class RestaurantController {
     //     return "dashboard"; 
     // }
 
-// ------------------ Partie Adam inscription Restaurant (formulaire) ------------------
 
+//--------------------------------------------------------------------------------------------
+/* ------------------ Partie Adam (formulaire) ------------------ */
+//--------------------------------------------------------------------------------------------
+
+           /* ------------------ Partie inscription Restaurant ------------------ */
     /**
      * Affiche le formulaire d'inscription d'un restaurant.
      * <p>
@@ -62,7 +66,7 @@ public class RestaurantController {
         return "formulaire";
     }
 
-
+/*---------------------------------------------------------------------------------------------------------------------------------- */
     /**
      * Traite la soumission du formulaire d'inscription d'un restaurant.
      * <p>
@@ -130,8 +134,8 @@ public class RestaurantController {
         Restaurant nouveauRestaurant = restaurantService.enregistrerRestaurant(restaurant);
         return "redirect:/admin/success?restaurantId=" + nouveauRestaurant.getId();
     }
-
-// ------------------ Partie affichage de la page succès ------------------
+/*---------------------------------------------------------------------------------------------------------------------------------- */
+              /* ------------------ Partie affichage de la page success ------------------ */
 
     /** n                 
      * Affiche la page succès après l'inscription du restaurant.
@@ -151,6 +155,9 @@ public class RestaurantController {
         model.addAttribute("restaurant", restaurant);
         return "success";
     }
+//--------------------------------------------------------------------------------------------
+/* ------------------ FIN Partie Adam (formulaire) ------------------ */
+//--------------------------------------------------------------------------------------------
 
 
     

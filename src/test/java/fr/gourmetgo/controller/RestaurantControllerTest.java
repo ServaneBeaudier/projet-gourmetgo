@@ -34,6 +34,13 @@ public class RestaurantControllerTest {
     ReflectionTestUtils.setField(restaurantController, "restaurantService", restaurantService);
 }
 
+
+//--------------------------------------------------------------------------------------------
+        /* ------------------ Partie Adam (TESTS RestaurantController) ------------------ */
+//--------------------------------------------------------------------------------------------
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------- */
+
     /**
      * Vérifie que la méthode GET pour afficher le formulaire
      * ajoute bien un Restaurant vide dans le modèle et retourne "formulaire".
@@ -45,6 +52,8 @@ public class RestaurantControllerTest {
         assertEquals("formulaire", vue, "La vue renvoyée doit être 'formulaire'");// Vérification de la vue retournée
         assertNotNull(model.getAttribute("restaurant"), "Le modèle doit contenir une instance de Restaurant");// Vérification que le modèle contient un attribut "restaurant"
     }
+/*------------------------------------------------------------------------------------------------------------------------------------------------- */
+/*------------------------------------------------------------------------------------------------------------------------------------------------- */
 
     /**
      * Teste le cas d'inscription réussi.
@@ -98,6 +107,8 @@ public class RestaurantControllerTest {
         // On s'assure que le BindingResult ne comporte pas d'erreur.
         assertFalse(result.hasErrors(), "Le BindingResult ne doit contenir aucune erreur.");
     }
+/*------------------------------------------------------------------------------------------------------------------------------------------------- */
+/*------------------------------------------------------------------------------------------------------------------------------------------------- */
 
     /**
      * Teste le cas où le fichier image n'est pas fourni.
@@ -132,6 +143,8 @@ public class RestaurantControllerTest {
         assertTrue(result.hasFieldErrors("imageResto"),
                 "Le BindingResult doit contenir une erreur pour le champ 'imageResto'.");
     }
+/*------------------------------------------------------------------------------------------------------------------------------------------------- */
+/*------------------------------------------------------------------------------------------------------------------------------------------------- */
 
     /**
      * Teste le cas où le restaurant existe déjà.
@@ -174,6 +187,8 @@ public class RestaurantControllerTest {
         assertEquals("Ce restaurant existe déjà.", result.getGlobalError().getDefaultMessage(),
                 "Le message d'erreur global doit indiquer que le restaurant existe déjà.");
     }
+/*------------------------------------------------------------------------------------------------------------------------------------------------- */
+/*------------------------------------------------------------------------------------------------------------------------------------------------- */
 
     /**
      * Teste le cas où des erreurs de binding (validation) sont présentes.
@@ -213,4 +228,5 @@ public class RestaurantControllerTest {
         assertEquals("formulaire", vueRetour, "En cas d'erreurs de validation, le formulaire doit être réaffiché.");
         assertTrue(result.hasFieldErrors("nomResto"), "Le BindingResult doit indiquer une erreur pour 'nomResto'.");
     }
+/*------------------------------------------------------------------------------------------------------------------------------------------------- */
 }

@@ -23,6 +23,12 @@ public class RestaurantEntityTest {
         validator = factory.getValidator();
     }
 
+
+//--------------------------------------------------------------------------------------------
+            /* ------------------ Partie Adam (TEST RestaurantEntity) ------------------ */
+//--------------------------------------------------------------------------------------------
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------- */
     /**
      * Vérifie qu'une instance de Restaurant correctement renseignée ne génère aucune violation.
      */
@@ -56,7 +62,8 @@ public class RestaurantEntityTest {
         
         
     }
-
+/*------------------------------------------------------------------------------------------------------------------------------------------------- */
+/*------------------------------------------------------------------------------------------------------------------------------------------------- */
     /**
      * Vérifie qu'une violation est générée si le nom du restaurant est vide.
      */
@@ -81,6 +88,8 @@ public class RestaurantEntityTest {
                         && v.getMessage().equals("Veuillez renseigner le nom du restaurant"));
         assertTrue(found, "La contrainte sur 'nomResto' n'a pas été détectée correctement");
     }
+/*------------------------------------------------------------------------------------------------------------------------------------------------- */
+/*------------------------------------------------------------------------------------------------------------------------------------------------- */
     
     /**
      * Vérifie qu'une violation est générée si le champ numRue est vide.
@@ -104,7 +113,8 @@ public class RestaurantEntityTest {
                         && v.getMessage().equals("Veuillez renseigner le numéro de rue"));
         assertTrue(found, "La contrainte sur 'numRue' n'a pas été détectée");
     }
-    
+/*------------------------------------------------------------------------------------------------------------------------------------------------- */
+/*------------------------------------------------------------------------------------------------------------------------------------------------- */
     /**
      * Vérifie qu'une violation est générée si le champ nomRue est vide.
      */
@@ -127,7 +137,8 @@ public class RestaurantEntityTest {
                         && v.getMessage().equals("Veuillez renseigner la rue"));
         assertTrue(found, "La contrainte sur 'nomRue' n'a pas été détectée");
     }
-    
+/*------------------------------------------------------------------------------------------------------------------------------------------------- */
+/*------------------------------------------------------------------------------------------------------------------------------------------------- */
     /**
      * Vérifie qu'une violation est générée si le code postal est vide.
      */
@@ -150,6 +161,8 @@ public class RestaurantEntityTest {
                         && v.getMessage().equals("Veuillez renseigner le code postal"));
         assertTrue(found, "La contrainte sur 'codePostal' n'a pas été détectée");
     }
+/*------------------------------------------------------------------------------------------------------------------------------------------------- */
+/*------------------------------------------------------------------------------------------------------------------------------------------------- */
     
     /**
      * Vérifie qu'une violation est générée si la ville est vide.
@@ -173,6 +186,8 @@ public class RestaurantEntityTest {
                         && v.getMessage().equals("Veuillez renseigner la ville"));
         assertTrue(found, "La contrainte sur 'ville' n'a pas été détectée");
     }
+/*------------------------------------------------------------------------------------------------------------------------------------------------- */
+/*------------------------------------------------------------------------------------------------------------------------------------------------- */
     
     /**
      * Vérifie qu'une violation est générée pour un numéro de téléphone au format invalide.
@@ -200,6 +215,8 @@ public class RestaurantEntityTest {
                         && v.getMessage().equals("Le numéro de téléphone doit contenir 10 chiffres et commencer par 0."));
         assertTrue(found, "La contrainte sur 'telResto' (pattern) n'a pas été détectée");
     }
+/*------------------------------------------------------------------------------------------------------------------------------------------------- */
+/*------------------------------------------------------------------------------------------------------------------------------------------------- */
     
     /**
      * Vérifie qu'une violation est générée si le type du restaurant est vide.
@@ -223,6 +240,8 @@ public class RestaurantEntityTest {
                         && v.getMessage().equals("Veuillez renseigner le type du restaurant."));
         assertTrue(found, "La contrainte sur 'typeResto' n'a pas été détectée");
     }
+/*------------------------------------------------------------------------------------------------------------------------------------------------- */
+/*------------------------------------------------------------------------------------------------------------------------------------------------- */
     
     /**
      * Vérifie qu'une violation est générée si l'heure d'ouverture est null.
@@ -246,6 +265,8 @@ public class RestaurantEntityTest {
                         && v.getMessage().equals("Veuillez renseigner l'horaire d'ouverture"));
         assertTrue(found, "La contrainte sur 'heureOuverture' n'a pas été respectée lorsque null");
     }
+/*------------------------------------------------------------------------------------------------------------------------------------------------- */
+/*------------------------------------------------------------------------------------------------------------------------------------------------- */
     
     /**
      * Vérifie qu'une violation est générée si l'heure de fermeture est null.
@@ -269,4 +290,5 @@ public class RestaurantEntityTest {
                         && v.getMessage().equals("Veuillez renseigner l'horaire de fermeture"));
         assertTrue(found, "La contrainte sur 'heureFermeture' n'a pas été respectée lorsque null");
     }
+/*------------------------------------------------------------------------------------------------------------------------------------------------- */
 }
