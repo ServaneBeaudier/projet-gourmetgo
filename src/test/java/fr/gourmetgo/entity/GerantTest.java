@@ -1,27 +1,54 @@
-/*package fr.gourmetgo.entity;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+package fr.gourmetgo.entity;
 
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class GerantTest {
 
     @Test
-    public void testGetterAndSetter(){
-        Gerant gerant = new Gerant();
-        Restaurant restaurant = new Restaurant("Chez Dede", "0250505050", "Italien");
+    public void testConstructeurEtHeritage() {
+        // Arrange
+        String nom = "Johnson";
+        String prenom = "Mike";
+        String email = "mike.johnson@example.com";
+        String motDePasse = "securePassword789";
 
-        gerant.setRestaurant(restaurant);
-        restaurant.setGerant(gerant);
+        // Act
+        Gerant gerant = new Gerant(nom, prenom, email, motDePasse);
 
-        assertNotNull(gerant.getRestaurant());
-        assertEquals("Chez Dede", gerant.getRestaurant().getNomResto());
-
-        restaurant.setNomResto("Chez Patou");
-
-        assertEquals("Chez Patou", gerant.getRestaurant().getNomResto());
+        // Assert
+        assertEquals(nom, gerant.getNom());
+        assertEquals(prenom, gerant.getPrenom());
+        assertEquals(email, gerant.getEmail());
+        assertEquals(motDePasse, gerant.getMotDePasse());
+        assertEquals("GERANT", gerant.getTypeUtilisateur());
     }
 
+    @Test
+    public void testEqualsEtHashCode() {
+        // Arrange
+        Gerant gerant1 = new Gerant("Johnson", "Mike", "mike.johnson@example.com", "securePassword789");
+        Gerant gerant2 = new Gerant("Johnson", "Mike", "mike.johnson@example.com", "securePassword789");
+        Gerant gerant3 = new Gerant("Smith", "Jane", "jane.smith@example.com", "anotherPassword456");
+
+        // Assert
+        assertEquals(gerant1, gerant2);
+        assertNotEquals(gerant1, gerant3);
+
+        assertEquals(gerant1.hashCode(), gerant2.hashCode());
+        assertNotEquals(gerant1.hashCode(), gerant3.hashCode());
+    }
+
+    @Test
+    public void testGetIdEtSetId() {
+        // Arrange
+        Gerant gerant = new Gerant("Johnson", "Mike", "mike.johnson@example.com", "securePassword789");
+        Long id = 1L;
+
+        // Act
+        gerant.setId(id);
+
+        // Assert
+        assertEquals(id, gerant.getId());
+    }
 }
-*/

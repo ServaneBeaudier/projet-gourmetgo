@@ -263,8 +263,11 @@ PAGE SUCCESS*/
     font-weight: bold;
     background-color: #B8CBD0;
     color : black;
-    width: 400px;
-    height: 250px;
+    width: 100%; /* Change to percentage for responsiveness */
+    max-width: 400px; /* Add max-width to control the maximum size */
+    height: auto; /* Change to auto for responsiveness */
+    margin-bottom: 20px;
+
 }
 
 .rectangle-client {
@@ -274,19 +277,23 @@ PAGE SUCCESS*/
     font-weight: bold;
     background-color: #709CA7;
     color : black;
-    width: 400px;
-    height: 250px;
+    width: 100%; /* Change to percentage for responsiveness */
+    max-width: 400px; /* Add max-width to control the maximum size */
+    height: auto; /* Change to auto for responsiveness */
+    margin-bottom: 20px;
 }
 
-.rectangle-restaurant {
+.rectangle-gerant {
     border: 2px solid black;
     border-radius: 15px;
     padding: 8px 20px;
     font-weight: bold;
     background-color: #344D59;
     color : white;
-    width: 400px;
-    height: 250px;
+    width: 100%; /* Change to percentage for responsiveness */
+    max-width: 400px; /* Add max-width to control the maximum size */
+    height: auto; /* Change to auto for responsiveness */
+    margin-bottom: 20px;
 }
 
 .bgd-mdp input{
@@ -306,7 +313,7 @@ PAGE SUCCESS*/
         }
 .form-email label {
             margin-right: 40px;
-            margin-left: 100;
+/*              margin-left: 100px; /* Adjust margin for responsiveness */
             width: 105px;
         }
 .form-email input {
@@ -321,7 +328,7 @@ PAGE SUCCESS*/
 }
 .form-mdp label {
             margin-top : 10px;
-            margin-left: 100;
+            /* margin-left: 100px; /* Adjust margin for responsiveness */
             width: 120px;
 }
 
@@ -332,7 +339,8 @@ PAGE SUCCESS*/
         font-weight: bold;
         background-color: #344D59;
         color : white;
-        width: 300px;
+        width: 100%; /* Change to percentage for responsiveness */
+        max-width: 300px; /* Add max-width to control the maximum size */
         height: 60px;
         align-items: center;
 }
@@ -348,7 +356,8 @@ PAGE SUCCESS*/
         font-weight: bold;
         background-color: #7A90A4;
         color : white;
-        width: 300px;
+        width: 100%; /* Change to percentage for responsiveness */
+        max-width: 300px; /* Add max-width to control the maximum size */
         height: 60px;
         align-items: center;
 }
@@ -357,18 +366,32 @@ PAGE SUCCESS*/
     background-color: #344D59;
 }
 
-.nav-button-restaurant {
+.nav-button-gerant {
         border: 2px solid black;
         border-radius: 15px;
         padding: 8px 20px;
         font-weight: bold;
         background-color: #7A90A4;
         color : white;
-        width: 300px;
+        width: 100%; /* Change to percentage for responsiveness */
+        max-width: 300px; /* Add max-width to control the maximum size */
         height: 60px;
         align-items: center;
     }
 
-.nav-button-restaurant:hover {
+.nav-button-gerant:hover {
     background-color: #709CA7;
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -50px; /* Ajustez cette valeur pour remonter l'image */
+    margin-left: -100px; /* Ajustez cette valeur pour remonter l'image */
+}
+
+.title {
+    text-align: center;
+    margin-top: 20px; /* Assurez-vous qu'il n'y a pas de marge supplémentaire en haut */
 }
