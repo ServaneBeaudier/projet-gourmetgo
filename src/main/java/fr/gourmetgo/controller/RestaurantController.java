@@ -25,6 +25,15 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
+
+/**
+* Contrôleur Spring MVC pour l'administration des restaurants.
+* 
+* Gère l'inscription, la modification, la suppression, la consultation
+* et la liste des restaurants, ainsi que l'upload d'images.
+* 
+* Toutes les routes sont accessibles sous le préfixe "/admin".
+*/
 @Controller
 @RequestMapping("/admin")
 public class RestaurantController {
@@ -32,6 +41,10 @@ public class RestaurantController {
     @Autowired
     private RestaurantService restaurantService;
 
+    /**
+    * Affiche la page d'accueil de l'administration des restaurants.
+    * @return le nom de la vue "accueilGR"
+    */
     @GetMapping("/restaurants")
     public String accueilGR() {
         return "accueilGR"; 
@@ -96,6 +109,11 @@ public class RestaurantController {
 
     }
 
+    /**
+    * Affiche la liste de tous les restaurants enregistrés.
+    * @param model le modèle contenant la liste des restaurants
+    * @return le nom de la vue "liste_restaurant"
+    */
     @GetMapping("/list")
     public String listRestaurants(Model model) {
         List<Restaurant> restaurants = restaurantService.getAllRestaurants();
@@ -104,7 +122,12 @@ public class RestaurantController {
     }
 
 
-
+    /**
+    * Affiche la fiche détaillée d'un restaurant.
+    * @param id l'identifiant du restaurant
+    * @param model le modèle contenant le restaurant à afficher
+    * @return la vue "fiche_restaurant", ou redirection si le restaurant n'existe pas
+    */
     @GetMapping("/list/{id}")
     public String showFicheRestaurant(@PathVariable Long id, Model model) {
         Restaurant restaurant = restaurantService.getRestaurantById(id);
@@ -116,7 +139,12 @@ public class RestaurantController {
     }
 
 
-
+    /**
+    * Affiche le formulaire d'édition d'un restaurant existant.
+    * @param id l'identifiant du restaurant à modifier
+    * @param model le modèle contenant le restaurant
+    * @return la vue "edit_restaurant"
+    */
     @GetMapping("/restaurants/edit/{id}")
     public String showEditForm(@PathVariable("id") Long id, Model model) {
         Restaurant restaurant = restaurantService.getRestaurantById(id);
@@ -125,7 +153,12 @@ public class RestaurantController {
     }
 
 
-
+    /**
+    * Met à jour un restaurant avec les données du formulaire, y compris l'image si une nouvelle est fournie.
+    * @param restaurant l'objet restaurant modifié
+    * @param imageFile le fichier image éventuellement modifié
+    * @return redirection vers la fiche mise à jour du restaurant
+    */
     @PostMapping("/restaurants/update")
     public String updateRestaurant(
         @ModelAttribute("restaurant") Restaurant restaurant,
@@ -163,7 +196,12 @@ public class RestaurantController {
     return "redirect:/admin/list/" + restaurant.getId();
     }
 
-
+    /**
+    * Supprime un restaurant donné par son identifiant.
+    * @param id l'identifiant du restaurant à supprimer
+    * @param redirectAttributes attributs pour afficher un message flash après redirection
+    * @return redirection vers la liste des restaurants
+    */
     @PostMapping("/restaurants/supprimer/{id}")
     public String supprimerRestaurant(@PathVariable Long id, RedirectAttributes redirectAttributes){
         restaurantService.supprimerRestaurant(id);

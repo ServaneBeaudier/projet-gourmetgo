@@ -10,16 +10,32 @@ import fr.gourmetgo.entity.Restaurant;
 import fr.gourmetgo.repository.RestaurantRepository;
 import jakarta.persistence.EntityNotFoundException;
 
+/**
+* Service pour la gestion des restaurants.
+*
+* Cette classe fournit des méthodes pour la gestion des restaurants, telles que la récupération,
+* la mise à jour, l'enregistrement, la suppression et la vérification de l'existence des restaurants.
+*/
 @Service
 public class RestaurantService {
 
     @Autowired
     private RestaurantRepository restaurantRepo;
 
+    /**
+    * Récupère un restaurant par son identifiant.
+    * @param id L'identifiant du restaurant.
+    * @return Le restaurant trouvé, ou null si aucun restaurant n'est trouvé.
+    */
     public Restaurant getRestaurantById(long id){
         return restaurantRepo.findById(id).orElse(null);
     }
 
+    /**
+    * Met à jour les informations d'un restaurant.
+    * @param restaurant Le restaurant avec les nouvelles informations.
+    * @throws EntityNotFoundException Si le restaurant n'est pas trouvé.
+    */
     public void updateRestaurant(Restaurant restaurant){
         Restaurant restaurantEnBase = restaurantRepo.findById(restaurant.getId())
                 .orElseThrow(() -> new EntityNotFoundException("Restaurant non trouvé"));
@@ -49,6 +65,11 @@ public class RestaurantService {
         return restaurantRepo.save(restaurant); // Retourne l’objet enregistré avec son ID
     }
 
+
+    /**
+    * Récupère la liste de tous les restaurants.
+    * @return La liste de tous les restaurants.
+    */
     public List<Restaurant> getAllRestaurants() {
         return restaurantRepo.findAll();
     }
@@ -64,6 +85,12 @@ public class RestaurantService {
     return existing.isPresent();    
     }
 
+
+    /**
+    * Supprime un restaurant par son identifiant.
+    * @param id L'identifiant du restaurant à supprimer.
+    * @throws EntityNotFoundException Si le restaurant n'est pas trouvé.
+    */
     public void supprimerRestaurant(Long id){
         if (restaurantRepo.existsById(id)) {
             restaurantRepo.deleteById(id);
