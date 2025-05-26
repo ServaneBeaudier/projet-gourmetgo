@@ -12,11 +12,20 @@ import fr.gourmetgo.repository.AuthRepository;
 @Service
 public class AuthService {
 
-    @Autowired
-    private AuthRepository authRepository;
+    private final AuthRepository authRepository;
+    private final PasswordService passwordService;
 
+    /**
+     * Constructeur pour l'injection des dépendances.
+     *
+     * @param authRepository Le dépôt pour accéder aux utilisateurs.
+     * @param passwordService Le service pour vérifier les mots de passe.
+     */
     @Autowired
-    private PasswordService passwordService;
+    public AuthService(AuthRepository authRepository, PasswordService passwordService) {
+        this.authRepository = authRepository;
+        this.passwordService = passwordService;
+    }
 
     /**
      * Authentifie un utilisateur avec l'email et le mot de passe fournis.
@@ -27,10 +36,7 @@ public class AuthService {
      */
     public boolean authenticate(String email, String motDePasse) {
         Utilisateur user = authRepository.findByEmail(email).orElse(null);
-        if (user != null) {
-            return passwordService.checkPassword(motDePasse, user.getMotDePasse());
-        }
-        return false;
+        return user != null && passwordService.checkPassword(motDePasse, user.getMotDePasse());
     }
 
     /**

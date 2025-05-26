@@ -2,9 +2,6 @@ package fr.gourmetgo.entity;
 
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 
 /**
  * Entité représentant un gérant dans le système.
@@ -13,10 +10,6 @@ import jakarta.persistence.Id;
 @Entity
 @DiscriminatorValue("GERANT")
 public class Gerant extends Utilisateur {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
     /**
      * Constructeur par défaut pour l'entité Gerant.
@@ -34,23 +27,5 @@ public class Gerant extends Utilisateur {
      */
     public Gerant(String nom, String prenom, String email, String motDePasse) {
         super(nom, prenom, email, motDePasse);
-    }
-
-    /**
-     * Obtient l'identifiant unique du gérant.
-     *
-     * @return L'identifiant unique du gérant.
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * Définit l'identifiant unique du gérant.
-     *
-     * @param id L'identifiant unique à définir pour le gérant.
-     */
-    public void setId(Long id) {
-        this.id = id;
     }
 }

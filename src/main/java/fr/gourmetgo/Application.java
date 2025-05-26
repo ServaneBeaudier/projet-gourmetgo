@@ -4,6 +4,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Profile;
 
 import fr.gourmetgo.entity.Administrateur;
 import fr.gourmetgo.entity.Client;
@@ -35,6 +36,7 @@ public class Application {
      * @return Un CommandLineRunner qui initialise les utilisateurs.
      */
     @Bean
+    @Profile("!test")
     CommandLineRunner init(AuthRepository authRepository, PasswordService passwordService) {
         return args -> {
             System.out.println("Initializing users...");
