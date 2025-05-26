@@ -20,9 +20,9 @@ public class Application {
 @Bean
 CommandLineRunner init(AuthRepository authRepository) {
 return args -> {
-	authRepository.save(new Administrateur("ad", "min", "admin@gg.com", "admin123"));
-	authRepository.save(new Gerant("ge", "rant", "dede@gg.com", "dede123"));
-	authRepository.save(new Client("cl", "ient", "vincent@gg.com", "vincent123"));
+	// authRepository.save(new Administrateur("ad", "min", "admin@gg.com", "admin123"));
+	// authRepository.save(new Gerant("ge", "rant", "dede@gg.com", "dede123"));
+	// authRepository.save(new Client("cl", "ient", "vincent@gg.com", "vincent123"));
 	};
 }
 

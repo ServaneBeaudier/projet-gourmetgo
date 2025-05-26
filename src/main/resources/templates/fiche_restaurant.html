@@ -15,47 +15,40 @@
 
     <main class="flex-grow-1">
 
-    <!-- Titre centré -->
-    <div class="titrepage text-center py-1 fixed-top">
-        <h3>Tableau de bord</h3>
-    </div>
-
     <!-- PREMIERE NAVBAR -->
     <!-- à placer en dehors du container pour prendre toute la page -->
-    <nav class="navbar navbar-expand-md navbar-custom py-1 fixed-top" style="top: 48px">
-        <div class="container-fluid justify-content-between">
+    <nav class="navbar navbar-expand-md navbar-custom flex-column p-0">
+    <!-- Ligne 1 : Titre + bouton burger -->
+    <div class="w-100 d-flex align-items-center justify-content-between px-3 py-0">
+        <div class="flex-grow-1 text-center">
+            <a href="/dashboard" class="btn btn-central btn-sm mx-auto">Tableau de bord</a>
+        </div>
 
-            <!-- Bouton burger -->
-            <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarButtons"
-            aria-controls="navbarButtons" aria-expanded="false" aria-label="Toggle navigation">
+        <!-- Burger menu à droite -->
+        <button class="navbar-toggler ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarButtons"
+                aria-controls="navbarButtons" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
-            </button>
+        </button>
+    </div>
 
-            <!-- Contenu à cacher/afficher -->
-            <div class="collapse navbar-collapse justify-content-center" id="navbarButtons">
-                <div class="d-flex flex-column flex-md-row gap-2 mt-3 mt-md-0">
-                    <a href="/admin/restaurants" class="btn nav-button">Gestion restaurants</a>
-                    <a href="/admin/clients" class="btn nav-button">Gestion clients</a>
-                    <a href="/admin/commandes" class="btn nav-button">Gestion commandes</a>
-                    <a href="/admin/statistiques" class="btn nav-button">Statistiques</a>
-                    <a href="/logout" class="btn btn-deconnexion">Déconnexion</a>
-                </div>
+    <!-- Ligne 2 : Liens de navigation (collapsables) -->
+    <div class="container-fluid w-100 justify-content-center px-3">
+        <div class="collapse navbar-collapse justify-content-center" id="navbarButtons">
+            <div class="d-flex flex-column flex-md-row gap-2 py-1">
+                <a href="/admin/restaurants" class="btn nav-button">Gestion restaurants</a>
+                <a href="/admin/clients" class="btn nav-button">Gestion clients</a>
+                <a href="/admin/commandes" class="btn nav-button">Gestion commandes</a>
+                <a href="/admin/statistiques" class="btn nav-button">Statistiques</a>
+                <a href="/logout" class="btn btn-deconnexion">Déconnexion</a>
             </div>
         </div>
+    </div>
     </nav>
 
     <!-- DEUXIEME NAV BAR -->
-    <nav class="navbar navbar-expand-md navbar-custom2 py-1 fixed-top" style="top: 96px">
-        <div class="container-fluid justify-content-between">
-            <!-- Bouton burger -->
-            <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarButtons"
-            aria-controls="navbarButtons" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <!-- Contenu à cacher/afficher -->
-            <div class="collapse navbar-collapse justify-content-center" id="navbarButtons">
-                <div class="d-flex flex-column flex-md-row gap-2 mt-3 mt-md-0">
+    <nav class="navbar navbar-expand-md navbar-custom2 py-1" style="top: 0px">
+        <div class="container-fluid justify-content-center">
+                <div class="d-flex flex-md-row gap-2 mt-3 mt-md-0">
                     <a href="/admin/restaurants/formulaire" class="btn button-accueilGR">Créer un compte restaurant</a>
                     <a href="/admin/clients" class="btn button-accueilGR">Rechercher un restaurant</a>
                     <a href="/admin/list" class="btn button-accueilGR">Liste des restaurants</a>
@@ -63,18 +56,22 @@
             </div>
         </div>
     </nav>
-    <br><br>
-    <h2 class="text-center mb-4" th:text="${restaurant.nomResto}">Nom du restaurant</h2>
+
+    <h2 id="nomResto" class="text-center mb-4" th:text="${restaurant.nomResto}">Nom du restaurant</h2>
 
     <div class = "container-fluid">
         <div class="row">
             <!-- Colonne gauche -->
-            <div class="col-md-3 section-gauche text-center">
+            <div class="col-md-12 col-lg-3 section-gauche text-center">
                 <div class="info-bloc">
                     <p><strong>ID :</strong> <span th:text="${restaurant.id}">1</span></p>
                 </div>
                 <div class="info-bloc">
-                    <p><strong>Type :</strong> <span th:text="${restaurant.typeResto}">Italien</span></p>
+                    <p><strong>Type :</strong>
+                        <span th:text="${restaurant.typeResto == 'autre' or restaurant.typeResto == 'Autre'} ? ${restaurant.autreType} : ${restaurant.typeResto}">
+                        Italien
+                        </span>
+                    </p>
                 </div>
                 <div class="info-bloc">
                     <p><strong>Adresse :</strong><br>
@@ -98,7 +95,7 @@
             </div>
 
             <!-- Colonne centrale : Image -->
-            <div class="col-md-6 text-center">
+            <div class="col-md-12 col-lg-6 text-center">
                 <img th:if="${restaurant.imageResto != null and restaurant.imageResto != ''}" 
                 th:src="@{${restaurant.imageResto}}" 
                 alt="Image du restaurant" 
@@ -110,13 +107,14 @@
             </div>
 
             <!-- Colonne droite -->
-            <div class="col-md-3 section-droite d-flex flex-column justify-content-between">
+            <div class="col-md-12 col-lg-1 section-droite d-flex flex-column justify-content-between">
                 <!-- Boutons haut droite -->
                 <div class="text-center">
                     <a th:href="@{'/admin/restaurants/edit/' + ${restaurant.id}}" class="btn btn-modif mb-2">Modifier</a>
-                    <form th:action="@{'/admin/restaurants/delete/' + ${restaurant.id}}" method="post">
-                        <button type="submit" class="btn btn-delete">Supprimer</button>
-                    </form>
+                    <br>
+                    <button type="button" class="btn btn-delete" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">
+                        Supprimer
+                    </button>
                 </div>
 
                 <!-- Boutons bas droite -->
@@ -128,6 +126,8 @@
                     <a href="#" class="btn btn-resto ">Promotions</a>
                 </div>
             </div>
+
+            <div class></div>
         </div>
     </div>
 
@@ -137,6 +137,29 @@
 <footer class="text-center mt-5 mb-3">
   &copy; 2025 - GourmetGo
 </footer>
+
+<!-- Modal de confirmation -->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmer la suppression</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+      </div>
+      <div class="modal-body">
+        Êtes-vous sûr de vouloir supprimer ce restaurant ? Cette action est irréversible.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+
+        <!-- Formulaire de suppression réel -->
+        <form id="deleteForm" th:action="@{'/admin/restaurants/supprimer/' + ${restaurant.id}}" method="post">
+          <button type="submit" class="btn btn-danger">Oui, supprimer</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
 </body>

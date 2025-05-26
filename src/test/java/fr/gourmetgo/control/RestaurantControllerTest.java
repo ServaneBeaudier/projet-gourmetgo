@@ -1,66 +1,149 @@
 package fr.gourmetgo.control;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoInteractions;
+import static org.mockito.Mockito.when;
 
-import org.junit.jupiter.api.BeforeEach;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import fr.gourmetgo.controller.RestaurantController;
 import fr.gourmetgo.entity.Restaurant;
 import fr.gourmetgo.service.RestaurantService;
 
+@ExtendWith(MockitoExtension.class)
 public class RestaurantControllerTest {
 
-    // Crée un mock de RestaurantService pour simuler son comportement
+    @InjectMocks
+    private RestaurantController restaurantController;
+
     @Mock
     private RestaurantService restaurantService;
 
-    @InjectMocks //créé une instance de restaurantcontroller et injecte le mock dedans
-    private RestaurantController restaurantController;
+    @Mock
+    private Model model;
 
-    // Déclare une instance de MockMvc pour simuler les requêtes HTTP
-    private MockMvc mockMvc;
+    @Mock
+    private RedirectAttributes redirectAttributes;
 
-    // Méthode exécutée avant chaque test pour initialiser les mocks et configurer MockMvc
-    @BeforeEach
-    public void setUp() {
-        // Initialise les annotations Mockito pour cette classe de test
-        MockitoAnnotations.openMocks(this);
-        // Configure MockMvc pour tester le contrôleur RestaurantController
-        mockMvc = MockMvcBuilders.standaloneSetup(restaurantController).build();
+    @Test
+    void testListRestaurants() {
+        Restaurant resto1 = new Restaurant();
+        resto1.setId(1L);
+        resto1.setNomResto("Chez Dede");
+
+        Restaurant resto2 = new Restaurant();
+        resto2.setId(2L);
+        resto2.setNomResto("Chez Patou");
+
+        List<Restaurant> restaurants = Arrays.asList(resto1, resto2);
+        when(restaurantService.getAllRestaurants()).thenReturn(restaurants);
+
+        String viewName = restaurantController.listRestaurants(model);
+
+        assertEquals("liste_restaurant", viewName);
+        verify(restaurantService).getAllRestaurants();
+        verify(model).addAttribute("restaurants", restaurants);
     }
 
-    // Méthode de test pour la méthode updateRestaurant du contrôleur
-    // @Test
-    // public void testUpdateRestaurant() throws Exception {
-    //     // Crée un objet Restaurant avec des valeurs initiales
-    //     Restaurant restaurant = new Restaurant();
-    //     // Définit l'ID du restaurant
-    //     restaurant.setId(1L);
+    @Test
+    void testShowFicheRestaurant_RestaurantFound() {
+        Long id = 1L;
+        Restaurant resto = new Restaurant();
+        resto.setId(id);
+        resto.setNomResto("Chez Dede");
 
-    //      // Configure le mock restaurantService pour retourner l'objet Restaurant lorsque updateRestaurant est appelé
-    //     when(restaurantService.updateRestaurant(any(Restaurant.class))).thenReturn(restaurant);
+        when(restaurantService.getRestaurantById(id)).thenReturn(resto);
 
-    //     // Utilise MockMvc pour envoyer une requête POST à l'endpoint /restaurants/update
-    //     // avec l'objet Restaurant comme attribut de modèle
-    //     mockMvc.perform(post("/restaurants/update")
-    //             .flashAttr("restaurant", restaurant))
-    //             // Vérifie que la réponse est une redirection (code 3xx)
-    //             .andExpect(status().is3xxRedirection())
-    //             // Vérifie que la redirection est vers l'URL /restaurants
-    //             .andExpect(redirectedUrl("/restaurants"));
+        String viewName = restaurantController.showFicheRestaurant(id, model);
 
-    //     // Vérifie que la méthode updateRestaurant du service a été appelée une fois avec l'objet Restaurant
-    //     verify(restaurantService, times(1)).updateRestaurant(restaurant);
-    // }
+        assertEquals("fiche_restaurant", viewName);
+        verify(restaurantService).getRestaurantById(id);
+        verify(model).addAttribute("restaurant", resto);
+    }
+
+    @Test
+    void testShowFicheRestaurant_RestaurantNotFound() {
+        Long id = 999L;
+        when(restaurantService.getRestaurantById(id)).thenReturn(null);
+
+        String viewName = restaurantController.showFicheRestaurant(id, model);
+
+        assertEquals("redirect:/admin/list", viewName);
+        verify(restaurantService).getRestaurantById(id);
+        verifyNoInteractions(model);
+    }
+
+    @Test
+    void testShowEditForm() {
+    Long id = 1L;
+    Restaurant resto = new Restaurant();
+    resto.setId(id);
+    resto.setNomResto("Chez Dede");
+
+    when(restaurantService.getRestaurantById(id)).thenReturn(resto);
+
+    String viewName = restaurantController.showEditForm(id, model);
+
+    assertEquals("edit_restaurant", viewName);
+    verify(restaurantService).getRestaurantById(id);
+    verify(model).addAttribute("restaurant", resto);
+}
+
+    @Test
+    void testUpdateRestaurant_withNewImage() throws IOException {
+        Long id = 1L;
+        Restaurant restaurant = new Restaurant();
+        restaurant.setId(id);
+        restaurant.setNomResto("Chez Dede");
+
+        // Simule un fichier image envoyé
+        MultipartFile imageFile = new MockMultipartFile(
+                "imageFile",
+                "test.jpg",
+                "image/jpeg",
+                "dummy image content".getBytes()
+        );
+
+        // Simule un restaurant déjà présent en base
+        Restaurant enBase = new Restaurant();
+        enBase.setId(id);
+        enBase.setImageResto("/uploads/ancienne.jpg");
+
+        when(restaurantService.getRestaurantById(id)).thenReturn(enBase);
+
+        // ACT
+        String result = restaurantController.updateRestaurant(restaurant, imageFile);
+
+        // ASSERT
+        verify(restaurantService).updateRestaurant(any(Restaurant.class));
+        assertTrue(result.contains("redirect:/admin/list/"));
+    }
+
+    @Test
+    void testSupprimerRestaurant() {
+        Long id = 5L;
+
+        String result = restaurantController.supprimerRestaurant(id, redirectAttributes);
+
+        verify(restaurantService, times(1)).supprimerRestaurant(id);
+        verify(redirectAttributes, times(1)).addFlashAttribute("message", "Le restaurant a bien été supprimé");
+        assertEquals("redirect:/admin/list", result);
+    }
 }

@@ -10,7 +10,7 @@ public class GerantTest {
     @Test
     public void testGetterAndSetter(){
         Gerant gerant = new Gerant();
-        Restaurant restaurant = new Restaurant();
+        Restaurant restaurant = new Restaurant("Chez Dede", "0250505050", "Italien");
 
         gerant.setRestaurant(restaurant);
         restaurant.setGerant(gerant);

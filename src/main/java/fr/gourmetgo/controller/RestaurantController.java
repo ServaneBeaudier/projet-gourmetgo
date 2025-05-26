@@ -21,9 +21,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
+/**
+* Contrôleur Spring MVC pour l'administration des restaurants.
+* 
+* Gère l'inscription, la modification, la suppression, la consultation
+* et la liste des restaurants, ainsi que l'upload d'images.
+* 
+* Toutes les routes sont accessibles sous le préfixe "/admin".
+*/
 @Controller
 @RequestMapping("/admin")
 public class RestaurantController {
@@ -31,22 +40,15 @@ public class RestaurantController {
     @Autowired 
     private RestaurantService restaurantService;
 
+    /**
+    * Affiche la page d'accueil de l'administration des restaurants.
+    * @return le nom de la vue "accueilGR"
+    */
     @GetMapping("/restaurants")
     public String accueilGR() {
         return "accueilGR"; 
     }
 
-    // @GetMapping("/dashboard")
-    // public String connexionOK() {
-    //     return "dashboard"; 
-    // }
-
-
-//--------------------------------------------------------------------------------------------
-/* ------------------ Partie Adam (formulaire) ------------------ */
-//--------------------------------------------------------------------------------------------
-
-           /* ------------------ Partie inscription Restaurant ------------------ */
     /**
      * Affiche le formulaire d'inscription d'un restaurant.
      * <p>
@@ -66,10 +68,9 @@ public class RestaurantController {
         return "formulaire";
     }
 
-/*---------------------------------------------------------------------------------------------------------------------------------- */
     /**
      * Traite la soumission du formulaire d'inscription d'un restaurant.
-     * <p>
+     *
      * Cette méthode gère la requête POST envoyée depuis le formulaire. Elle effectue plusieurs traitements :
      
     *     Gestion de l'image : vérifie si un fichier a été envoyé. Si c'est le cas, l'image est uploadée dans le dossier "uploads"
@@ -84,8 +85,6 @@ public class RestaurantController {
     
     *     Sauvegarde : si aucune erreur n'est détectée, le restaurant est sauvegardé et la méthode redirige vers la page succès en passant l'identifiant
     *     du nouveau restaurant en paramètre.
-
-    * </p>
     *
     * @param restaurant L'objet {@code Restaurant} rempli avec les données du formulaire.
     * @param result Le résultat de la validation qui peut contenir des erreurs si certaines contraintes ne sont pas respectées.
@@ -134,16 +133,12 @@ public class RestaurantController {
         Restaurant nouveauRestaurant = restaurantService.enregistrerRestaurant(restaurant);
         return "redirect:/admin/success?restaurantId=" + nouveauRestaurant.getId();
     }
-/*---------------------------------------------------------------------------------------------------------------------------------- */
-              /* ------------------ Partie affichage de la page success ------------------ */
 
-    /** n                 
+    /**              
      * Affiche la page succès après l'inscription du restaurant.
-     * <p>
      * Cette méthode gère la requête GET vers la page de succès,
      * récupérant l'ID du restaurant à partir du paramètre de requête et ajoutant l'objet Restaurant correspondant au modèle 
      * pour affichage dans la vue.
-     * </p>
      *
      * @param restaurantId l'identifiant du restaurant qui vient d'être inscrit
      * @param model le modèle dans lequel l'objet Restaurant est placé pour être affiché dans la vue
@@ -155,12 +150,12 @@ public class RestaurantController {
         model.addAttribute("restaurant", restaurant);
         return "success";
     }
-//--------------------------------------------------------------------------------------------
-/* ------------------ FIN Partie Adam (formulaire) ------------------ */
-//--------------------------------------------------------------------------------------------
 
-
-    
+    /**
+    * Affiche la liste de tous les restaurants enregistrés.
+    * @param model le modèle contenant la liste des restaurants
+    * @return le nom de la vue "liste_restaurant"
+    */
     @GetMapping("/list")
     public String listRestaurants(Model model) {
         List<Restaurant> restaurants = restaurantService.getAllRestaurants();
@@ -168,13 +163,30 @@ public class RestaurantController {
         return "liste_restaurant";
     }
 
+
+    /**
+    * Affiche la fiche détaillée d'un restaurant.
+    * @param id l'identifiant du restaurant
+    * @param model le modèle contenant le restaurant à afficher
+    * @return la vue "fiche_restaurant", ou redirection si le restaurant n'existe pas
+    */
     @GetMapping("/list/{id}")
     public String showFicheRestaurant(@PathVariable Long id, Model model) {
         Restaurant restaurant = restaurantService.getRestaurantById(id);
+        if (restaurant == null) {
+        return "redirect:/admin/list";
+    }
         model.addAttribute("restaurant", restaurant);
         return "fiche_restaurant";
     }
 
+
+    /**
+    * Affiche le formulaire d'édition d'un restaurant existant.
+    * @param id l'identifiant du restaurant à modifier
+    * @param model le modèle contenant le restaurant
+    * @return la vue "edit_restaurant"
+    */
     @GetMapping("/restaurants/edit/{id}")
     public String showEditForm(@PathVariable("id") Long id, Model model) {
         Restaurant restaurant = restaurantService.getRestaurantById(id);
@@ -182,6 +194,12 @@ public class RestaurantController {
         return "edit_restaurant";
     }
 
+    /**
+    * Met à jour un restaurant avec les données du formulaire, y compris l'image si une nouvelle est fournie.
+    * @param restaurant l'objet restaurant modifié
+    * @param imageFile le fichier image éventuellement modifié
+    * @return redirection vers la fiche mise à jour du restaurant
+    */
     @PostMapping("/restaurants/update")
     public String updateRestaurant(
         @ModelAttribute("restaurant") Restaurant restaurant,
@@ -217,8 +235,20 @@ public class RestaurantController {
     restaurantService.updateRestaurant(restaurant);
 
     return "redirect:/admin/list/" + restaurant.getId();
-}
+    }
 
+    /**
+    * Supprime un restaurant donné par son identifiant.
+    * @param id l'identifiant du restaurant à supprimer
+    * @param redirectAttributes attributs pour afficher un message flash après redirection
+    * @return redirection vers la liste des restaurants
+    */
+    @PostMapping("/restaurants/supprimer/{id}")
+    public String supprimerRestaurant(@PathVariable Long id, RedirectAttributes redirectAttributes){
+        restaurantService.supprimerRestaurant(id);
+        redirectAttributes.addFlashAttribute("message", "Le restaurant a bien été supprimé");
+        return "redirect:/admin/list";
+    }
 
 
 
