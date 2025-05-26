@@ -43,7 +43,7 @@ public class RestaurantEntityTest {
         Set<ConstraintViolation<Restaurant>> violations = validator.validate(restaurant);
         assertTrue(violations.isEmpty(), "Aucune violation ne doit être présente pour un Restaurant valide");
 
-        // Vérification des valeurs (et test des getters/setters pour Servane :) )
+        // Vérification des valeurs (et test des getters/setters)
         assertEquals("Restaurant A", restaurant.getNomResto(), "Le nom du restaurant doit être 'Restaurant A'");
         assertEquals("123", restaurant.getNumRue(), "Le numéro de rue doit être '123'");
         assertEquals("Rue de Paris", restaurant.getNomRue(), "Le nom de la rue doit être 'Rue de Paris'");      

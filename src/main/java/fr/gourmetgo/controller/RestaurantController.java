@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 @RequestMapping("/admin")
 public class RestaurantController {
 
-    @Autowired
+    @Autowired 
     private RestaurantService restaurantService;
 
     @GetMapping("/restaurants")
