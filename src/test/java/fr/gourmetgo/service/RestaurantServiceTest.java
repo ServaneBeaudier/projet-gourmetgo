@@ -182,7 +182,7 @@ public class RestaurantServiceTest {
     public void testGetRestaurantById_notFound(){
         long id = 999L;
 
-        when(restaurantRepository.findById(null)).thenReturn(Optional.empty());
+        when(restaurantRepository.findById(999L)).thenReturn(Optional.empty());
 
         Restaurant result = restaurantService.getRestaurantById(id);
 
