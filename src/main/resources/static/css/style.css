@@ -66,6 +66,10 @@ body {
     }
 }
 
+#logo-dashboard {
+    padding-top: 50px;
+}
+
 /* fiche_restaurant */
 .image-resto {
     max-width:500px;
@@ -93,7 +97,7 @@ body {
 }
 
 #nomResto {
-   margin-top: 5px;
+   margin-top: 24px;
 }
 
 .info-bloc {
@@ -103,23 +107,25 @@ body {
     margin-bottom: 10px
 
 }
-.btn-modif, .btn-delete {
+.btn-modif, .btn-delete, .btn-resto {
+    background-color: #7A90A4;
+    border-color: #7A90A4;
+    color: white;
     border-radius: 15px;
     padding: 8px 20px;
     font-weight: bold;
-    background-color: #7A90A4;
-    color : white;
-    width : 200px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    display: inline-block;
+    width:150px;
 }
 
-.btn-resto {
-    border-radius: 15px;
-    padding: 8px 20px;
-    font-weight: bold;
-    background-color: #7A90A4;
-    color : white;
-    width : 200px;
+.btn-modif:hover, .btn-delete:hover, .btn-resto:hover{
+    background-color: #344D59;
+    border-color: #344D59;
+    color: white;
 }
+
 
 /* Page liste restaurant */
 .resto-link{
@@ -136,15 +142,23 @@ body {
 
 /* Page modification */
 .btn-valider{
-    background-color: #709CA7;
+    background-color: #7A90A4;
+    border-color: #7A90A4;
+    color: white;
     border-radius: 15px;
-    padding: 8px 10px;
-    box-shadow: 0 2px 6px black;
-    width : 200px;
+    padding: 8px 20px;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    display: inline-block;
+    width : 150px;
+
 }
 
 .btn-valider:hover{
-    background-color: #90bad4;
+    background-color: #344D59;
+    border-color: #344D59;
+    color: white;
 }
 
 @media (max-width:992px){
@@ -174,11 +188,24 @@ encadre = encadre des champs
     }
     
     #form-valider , #form-resetBtn{
-        background-color : #709CA7 !important;
-        border-radius : 15px !important;
-        padding : 8px 20px !important;
-        box-shadow: 0 2px 6px black !important;
+      background-color: #7A90A4;
+      border-color: #7A90A4;
+      color: white;
+      border-radius: 15px;
+      padding: 8px 20px;
+      font-weight: bold;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+      text-decoration: none;
+      display: inline-block;
+      width: 150px;
     }
+
+    #form-valider:hover , #form-resetBtn:hover {
+      background-color: #344D59;
+      border-color: #344D59;
+      color: white;
+    }
+
     .form-control {
       background-color: #FFFFFF;
       border: 1px solid #ffffff;
@@ -229,7 +256,7 @@ PAGE SUCCESS*/
     }
     
     /* parametres boutons*/
-    .boutonSucces-container {
+    .colonne-droite {
     margin-top: 20px;  /* Ajustez la valeur (en pixels ou rem) selon vos préférences */
 }
     .bouton-succes {
@@ -248,10 +275,7 @@ PAGE SUCCESS*/
       border-color: #344D59;
       color: white;
     }
-    /* Personnalisation du conteneur pour une meilleure lisibilité */
-    .container {
-      padding: 5rem;
-    }
+    
    
 
 
@@ -294,6 +318,12 @@ PAGE SUCCESS*/
     max-width: 400px; /* Add max-width to control the maximum size */
     height: auto; /* Change to auto for responsiveness */
     margin-bottom: 20px;
+}
+
+@media (max-width:767px){
+    .rectangle-client , .rectangle-gerant , .rectangle-membre {
+       margin : auto;
+    }
 }
 
 .bgd-mdp input{
@@ -389,6 +419,12 @@ PAGE SUCCESS*/
     align-items: center;
     margin-top: -50px; /* Ajustez cette valeur pour remonter l'image */
     margin-left: -100px; /* Ajustez cette valeur pour remonter l'image */
+}
+
+@media (max-width:992px){
+    .logo {
+        padding-left: 100px;
+    }
 }
 
 .title {

@@ -71,7 +71,7 @@
       <!-- Label pour le champ nom du restaurant -->
       <label for="nomResto" class="form-label h4">Nom du restaurant :</label>
       <!-- Champ de saisie lié à l'attribut "nomResto" de l'objet Restaurant -->
-      <input type="text" id="nomResto" name="nomResto" class="form-control w-50 mx-auto" th:field="*{nomResto}">
+      <input type="text" name="nomResto" class="form-control w-50 mx-auto" th:field="*{nomResto}">
       <!-- Zone d'affichage des erreurs éventuelles pour le champ "nomResto" -->
       <div class="text-danger" th:if="${#fields.hasErrors('nomResto')}" th:errors="*{nomResto}"></div>
     </div>
@@ -80,7 +80,7 @@
     <div class="row align-items-center">
       
       <!-- Colonne gauche : Informations générales et adresse -->
-      <div class="col-md-4">
+      <div class="col-md-12 col-lg-4 text-center">
         
         <!-- Sélection du type de restaurant -->
         <div class="form-encadre">
@@ -170,7 +170,7 @@
       </div>
       
       <!-- Colonne centrale : Section d'upload de l'image du restaurant -->
-      <div class="col-md-4 d-flex justify-content-center">
+      <div class="col-md-12 col-lg-4 d-flex justify-content-center">
         <div class="form-image-placeholder">
           <label for="imageResto" class="form-label text-white">Ajouter une image :</label>
           <input type="file" id="imageResto" name="imageFile" class="form-control" accept="image/*">
@@ -183,7 +183,7 @@
       </div>
       
       <!-- Colonne droite : Boutons de validation et de réinitialisation du formulaire -->
-      <div class="col-md-4 d-flex flex-column align-items-center boutonSucces-container">
+      <div class="col-md-12 col-lg-4 d-flex flex-column align-items-center colonne-droite">
         <button id="form-valider" type="submit" class="form-btn-custom mb-2">Valider</button>
         <button id="form-resetBtn" type="reset" class="form-btn-custom mb-2">Réinitialiser</button>
 

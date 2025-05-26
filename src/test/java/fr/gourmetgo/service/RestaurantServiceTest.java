@@ -1,4 +1,4 @@
-/* package fr.gourmetgo.service;
+package fr.gourmetgo.service;
 
 import fr.gourmetgo.entity.Gerant;
 import fr.gourmetgo.entity.Restaurant;
@@ -302,7 +302,6 @@ public class RestaurantServiceTest {
 
     // Et on vérifie que la sauvegarde a bien été faite
     verify(restaurantRepository).save(restaurantEnBase);
-}
+    }
 
 }
- */

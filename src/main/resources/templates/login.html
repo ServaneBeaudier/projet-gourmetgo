@@ -18,9 +18,9 @@
         <h1>Gourmet Go</h1>
     </div>
     <div class="container mt-5">
-        <div class="row">
+        <div class="row justify-content-center">
           <h2></h2>
-            <div class="col-md-6 mb-2">
+            <div class="col-md-6 mb-2 mx-auto">
                 <div class="rectangle-membre">
                     <h5 class="card-title">Connexion</h5>
                         <form method="post" th:action="@{/auth-login}">
@@ -28,7 +28,7 @@
                                 <label for="email">Email :</label>
                                 <input type="email" id="email" name="email" placeholder="Email" class="form-control" required/>
                             </div>
-                            <div class="row align-items-center">
+                            <div class="row justify-content-center">
                                 <div class="form-mdp col-auto">
                                     <label for="mdp">Mot de passe :</label>
                                      </div>
@@ -38,7 +38,8 @@
                                             <p th:if="${error}" th:text="${error}"></p>
                                         </div>
                                     </div>
-                            </div>                            <div class="d-flex justify-content-center">
+                            </div>
+                            <div class="d-flex justify-content-center">
                                 <button class="btn nav-button-membre" type="submit" text-center>Se connecter</button>
                             </div>
                     </form>       
