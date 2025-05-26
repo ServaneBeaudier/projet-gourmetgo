@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-public class RestaurantControllerTest {
+public class RestaurantControllerTest1 {
 
     private RestaurantService restaurantService;
     private RestaurantController restaurantController;

@@ -1,4 +1,4 @@
-package fr.gourmetgo.control;
+package fr.gourmetgo.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -28,7 +28,7 @@ import fr.gourmetgo.entity.Restaurant;
 import fr.gourmetgo.service.RestaurantService;
 
 @ExtendWith(MockitoExtension.class)
-public class RestaurantControllerTest {
+public class RestaurantControllerTest2 {
 
     @InjectMocks
     private RestaurantController restaurantController;
