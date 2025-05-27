@@ -15,6 +15,7 @@ import fr.gourmetgo.service.PasswordService;
 /**
  * Classe principale de l'application Spring Boot.
  * Cette classe initialise et démarre l'application Spring Boot.
+ * Elle configure également des utilisateurs par défaut pour faciliter le développement et les tests.
  */
 @SpringBootApplication
 public class Application {
@@ -30,6 +31,7 @@ public class Application {
 
     /**
      * Initialise des utilisateurs par défaut dans la base de données lors du démarrage de l'application.
+     * Les utilisateurs par défaut incluent un administrateur, un gérant et un client.
      *
      * @param authRepository Le dépôt pour sauvegarder les utilisateurs.
      * @param passwordService Le service pour hacher les mots de passe.

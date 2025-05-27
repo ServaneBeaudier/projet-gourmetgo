@@ -8,6 +8,7 @@ import fr.gourmetgo.repository.AuthRepository;
 /**
  * Service pour gérer les opérations d'authentification des utilisateurs.
  * Ce service fournit des méthodes pour authentifier les utilisateurs et récupérer les informations des utilisateurs.
+ * Il facilite la gestion des sessions utilisateur et la vérification des identifiants.
  */
 @Service
 public class AuthService {

@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 /**
  * Entité représentant un gérant dans le système.
  * Cette classe hérite de la classe Utilisateur et est utilisée pour définir des utilisateurs avec des privilèges de gérant.
+ * Les gérants ont généralement accès à des fonctionnalités spécifiques pour gérer les aspects opérationnels du système.
  */
 @Entity
 @DiscriminatorValue("GERANT")
@@ -13,6 +14,7 @@ public class Gerant extends Utilisateur {
 
     /**
      * Constructeur par défaut pour l'entité Gerant.
+     * Nécessaire pour JPA.
      */
     public Gerant() {
     }

@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 /**
  * Entité représentant un administrateur dans le système.
  * Cette classe hérite de la classe Utilisateur et est utilisée pour définir des utilisateurs avec des privilèges d'administrateur.
+ * Les administrateurs ont généralement accès à des fonctionnalités supplémentaires pour gérer le système et les autres utilisateurs.
  */
 @Entity
 @DiscriminatorValue("ADMIN")
@@ -13,6 +14,7 @@ public class Administrateur extends Utilisateur {
 
     /**
      * Constructeur par défaut pour l'entité Administrateur.
+     * Nécessaire pour JPA.
      */
     public Administrateur() {
     }

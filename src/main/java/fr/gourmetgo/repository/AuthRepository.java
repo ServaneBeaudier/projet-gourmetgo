@@ -9,6 +9,7 @@ import fr.gourmetgo.entity.Utilisateur;
 /**
  * Interface de dépôt pour gérer les opérations de base de données liées à l'authentification des utilisateurs.
  * Cette interface étend JpaRepository pour fournir des méthodes CRUD et des requêtes personnalisées pour l'entité Utilisateur.
+ * Elle facilite l'accès aux données utilisateur nécessaires pour les processus d'authentification.
  */
 @Repository
 public interface AuthRepository extends JpaRepository<Utilisateur, Long> {

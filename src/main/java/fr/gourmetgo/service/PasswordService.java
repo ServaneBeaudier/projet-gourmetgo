@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 /**
  * Service pour gérer les opérations de hachage et de vérification des mots de passe.
  * Ce service utilise BCrypt pour hacher les mots de passe et vérifier leur validité.
+ * BCrypt est choisi pour sa robustesse et sa sécurité dans le stockage des mots de passe.
  */
 @Service
 public class PasswordService {

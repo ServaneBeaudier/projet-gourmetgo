@@ -32,6 +32,7 @@ public abstract class Utilisateur {
 
     /**
      * Constructeur par défaut pour l'entité Utilisateur.
+     * Nécessaire pour JPA.
      */
     public Utilisateur() {
     }
@@ -158,7 +159,14 @@ public abstract class Utilisateur {
             throw new IllegalArgumentException("Unknown user type");
         }
     }
-    
+
+    /**
+     * Compare cet utilisateur à un autre objet pour l'égalité.
+     * Les utilisateurs sont considérés comme égaux si leurs noms, prénoms, emails et mots de passe sont égaux.
+     *
+     * @param o L'objet à comparer avec cet utilisateur.
+     * @return true si les objets sont égaux, false sinon.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -170,6 +178,11 @@ public abstract class Utilisateur {
                Objects.equals(motDePasse, that.motDePasse);
     }
 
+    /**
+     * Génère un code de hachage pour cet utilisateur.
+     *
+     * @return Un code de hachage pour cet utilisateur.
+     */
     @Override
     public int hashCode() {
         return Objects.hash(nom, prenom, email, motDePasse);
